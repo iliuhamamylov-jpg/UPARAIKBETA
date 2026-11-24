@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Афиша концертов · Афиша</title>
+    <link rel="stylesheet" href="style.css?v=3" />
+    <script src="data.js?v=3" defer></script>
+    <script src="pages.js" defer></script>
+    <script src="app.js?v=3" defer></script>
+  </head>
+  <body data-page="catalog">
+    <header id="header">
+      <a class="logo" href="index.html" aria-label="Афиша, главная">
+        <img src="assets/hero-logo.jpg" alt="" />
+      </a>
+      <small class="slogan">
+        КОНЦЕРТЫ
+        <br />
+        В ГОРОДЕ
+      </small>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="concerts.html" aria-current="page">Афиша концертов</a>
+        <a href="profile.html">Личный кабинет</a>
+      </nav>
+      <div class="tools">
+        <a aria-label="Поиск концертов" href="concerts.html?search=1">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="10" cy="10" r="7" />
+            <path d="m15 15 6 6" />
+          </svg>
+        </a>
+        <a aria-label="Профиль" href="profile.html">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 22v-2a8 8 0 0 1 16 0v2" />
+          </svg>
+        </a>
+      </div>
+    </header>
+    <main id="main">
+      <section class="concert-listing" aria-labelledby="listing-title">
+        <header class="listing-cover">
+          <h1 id="listing-title">
+            Афиша
+            <svg class="listing-crown" viewBox="0 0 100 72" aria-hidden="true">
+              <path
+                d="M5 51 26 8 27 44 60 7 54 49 92 27 66 64 8 51"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <br />
+            концертов
+          </h1>
+        </header>
+        <nav class="market-tabs" aria-label="Раздел афиши">
+          <a href="concerts.html" aria-current="page">Концерты</a>
+          <a href="#resale">Перепродажа</a>
+        </nav>
+        <div id="primary-listing">
+          <form
+            id="filters"
+            class="listing-filters"
+            role="search"
+            aria-label="Поиск и фильтры концертов"
+          >
+            <label class="listing-search" hidden>
+              <span>Поиск</span>
+              <input
+                type="search"
+                id="query"
+                placeholder="Артист или площадка"
+                autocomplete="off"
+              />
+            </label>
+            <div class="listing-toolbar">
+              <details class="listing-filter">
+                <summary>
+                  <svg aria-hidden="true"><use href="#icon-cal" /></svg>
+                  <span data-filter-title="date">Все даты</span>
+                </summary>
+                <div class="listing-options">
+                  <label>
+                    Дата концерта
+                    <input name="date" type="date" />
+                  </label>
+                </div>
+              </details>
+              <details class="listing-filter">
+                <summary>
+                  <svg aria-hidden="true"><use href="#icon-pin" /></svg>
+                  <span data-filter-title="venue">Все площадки</span>
+                </summary>
+                <fieldset class="listing-options" data-choices="venue">
+                  <legend>Площадки</legend>
+                </fieldset>
+              </details>
+              <details class="listing-filter">
+                <summary>
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  >
+                    <path
+                      d="m2 11 15-7 4 8a3 3 0 0 0 1 3l-16 7-2-4a3 3 0 0 0-1-5z"
+                    />
+                  </svg>
+                  <span data-filter-title="genre">Все жанры</span>
+                </summary>
+                <fieldset class="listing-options" data-choices="genre">
+                  <legend>Жанры</legend>
+                </fieldset>
+              </details>
+              <details class="listing-filter listing-filter--price">
+                <summary><span data-filter-title="price">Цена</span></summary>
+                <div class="listing-options">
+                  <label>
+                    До
+                    <output id="limit" for="listing-price"></output>
+                    ₽
+                    <input
+                      id="listing-price"
+                      type="range"
+                      name="price"
+                      min="0"
+                      max="10000"
+                      value="10000"
+                    />
+                  </label>
+                </div>
+              </details>
+              <label class="listing-sort">
+                Сортировка
+                <select id="sort">
+                  <option value="date">по дате</option>
+                  <option value="price">по цене</option>
+                </select>
+              </label>
+            </div>
+            <button type="reset" class="listing-reset" hidden>
+              Сбросить фильтры
+            </button>
+          </form>
+          <div id="results" class="listing-results"></div>
+          <p class="listing-empty" hidden>По этим условиям концертов нет.</p>
+          <div class="listing-pagination" hidden>
+            <nav aria-label="Страницы афиши">
+              <button
+                type="button"
+                data-step="-1"
+                aria-label="Предыдущая страница"
+              >
+                ←
+              </button>
+              <div data-page-numbers></div>
+              <button
+                type="button"
+                data-step="1"
+                aria-label="Следующая страница"
+              >
+                →
+              </button>
+            </nav>
+            <label>
+              Показывать по
+              <select id="page-size">
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+              </select>
+            </label>
+          </div>
+          <template id="listing-page"><button type="button"></button></template>
+          <template id="listing-row">
+            <article class="listing-row">
+              <div class="listing-row__art"><img alt="" loading="lazy" /></div>
+              <div class="listing-row__artist">
+                <small>Концерт</small>
+                <h2><button type="button" data-open></button></h2>
+              </div>
+              <time class="listing-row__date">
+                <strong></strong>
+                <span></span>
+              </time>
+              <div class="listing-row__venue">
+                <svg aria-hidden="true"><use href="#icon-pin" /></svg>
+                <div>
+                  <span data-venue></span>
+                  <small>Москва</small>
+                </div>
+              </div>
+              <div class="listing-row__actions">
+                <b data-price></b>
+                <button
+                  class="listing-save"
+                  type="button"
+                  data-fav
+                  aria-pressed="false"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    fill="none"
+                  >
+                    <path d="M4 2h16v20l-8-5-8 5z" />
+                  </svg>
+                </button>
+                <button type="button" class="listing-buy" data-open>
+                  Купить билет
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </article>
+          </template>
+        </div>
+        <section id="resale" aria-labelledby="market-heading" hidden>
+          <h2 id="market-heading">Перепродажа билетов</h2>
+          <p id="market-status" role="status"></p>
+          <div id="offers"></div>
+        </section>
+        <template id="market-row">
+          <article class="market-row">
+            <img alt="" />
+            <div>
+              <h3></h3>
+              <p data-meta></p>
+              <p data-seat></p>
+            </div>
+            <strong></strong>
+            <button class="listing-buy" data-buy-offer>Купить билет</button>
+          </article>
+        </template>
+      </section>
+    </main>
+    <dialog id="panel" aria-labelledby="panel-title">
+      <div class="sheet">
+        <button class="circle" data-close="" aria-label="Закрыть">
+          <svg aria-hidden="true"><use href="#icon-close" /></svg>
+        </button>
+        <div class="dialog-content"></div>
+      </div>
+    </dialog>
+    <!-- shared-templates -->
+  </body>
+</html>

@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Админ-панель · Афиша</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="portal.css" />
+    <script defer src="data.js"></script>
+    <script defer src="jsQR.js"></script>
+    <script defer src="scanner.js"></script>
+    <script defer src="admin.js"></script>
+  </head>
+  <body class="backstage">
+    <aside class="admin-rail">
+      <a class="rail-brand" href="index.html">
+        <img src="assets/hero-logo.jpg" alt="Афиша" />
+        <span>Админ-панель</span>
+      </a>
+      <nav aria-label="Управление" id="admin-nav" hidden>
+        <a href="#events">
+          <svg><use href="#i-ticket" /></svg>
+          Концерты
+        </a>
+        <a href="#artists">
+          <svg><use href="#i-person" /></svg>
+          Артисты
+        </a>
+        <a href="#check">
+          <svg><use href="#i-qr" /></svg>
+          Проверка билетов
+        </a>
+        <a href="#stats">
+          <svg><use href="#i-chart" /></svg>
+          Статистика
+        </a>
+        <a href="#users">
+          <svg><use href="#i-person" /></svg>
+          Пользователи
+        </a>
+      </nav>
+      <button id="admin-logout" type="button" hidden>
+        Выйти
+        <span aria-hidden="true">↗</span>
+      </button>
+    </aside>
+    <div class="admin-shell">
+      <header class="operator-bar">
+        <a href="profile.html">
+          <img src="assets/avatar.jpg" alt="" />
+          <span id="operator">Личный кабинет</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+      <main class="admin-main">
+        <p id="notice" role="status"></p>
+        <form hidden id="admin-login" class="paper-ticket admin-login">
+          <h1>Вход администратора</h1>
+          <label>
+            Email
+            <input required name="email" type="email" autocomplete="username" />
+          </label>
+          <label>
+            Пароль
+            <input
+              required
+              name="password"
+              type="password"
+              autocomplete="current-password"
+            />
+          </label>
+          <button class="orange-ticket">Войти</button>
+        </form>
+        <div hidden id="workspace" class="admin-workspace">
+          <div class="admin-center">
+            <section id="events" data-view>
+              <header class="view-heading">
+                <div>
+                  <h1>
+                    Концерты
+                    <svg class="portal-crown"><use href="#i-crown" /></svg>
+                  </h1>
+                  <p>
+                    Управление концертами: добавление, редактирование и отмена
+                  </p>
+                </div>
+                <button type="button" class="orange-ticket" data-create="event">
+                  ＋ Добавить концерт
+                </button>
+              </header>
+              <form id="event-filters" class="admin-filters" role="search">
+                <input
+                  type="search"
+                  name="query"
+                  aria-label="Название, артист или площадка"
+                  placeholder="Поиск по артисту или площадке…"
+                />
+                <select name="date" aria-label="Дата">
+                  <option value="">Все даты</option>
+                </select>
+                <select name="venue" aria-label="Площадка">
+                  <option value="">Все площадки</option>
+                </select>
+                <select name="status" aria-label="Статус">
+                  <option value="">Все статусы</option>
+                  <option value="active">Опубликован</option>
+                  <option value="cancelled">Отменён</option>
+                </select>
+              </form>
+              <table class="events-table">
+                <caption class="visually-hidden">Список концертов</caption>
+                <thead>
+                  <tr>
+                    <th>Концерт / артист</th>
+                    <th>Дата и время</th>
+                    <th>Площадка</th>
+                    <th>Статус</th>
+                    <th><span class="visually-hidden">Действия</span></th>
+                  </tr>
+                </thead>
+                <tbody id="admin-events"></tbody>
+              </table>
+              <p id="no-events" hidden>По этим условиям концертов нет.</p>
+              <div class="admin-pages">
+                <nav
+                  aria-label="Страницы концертов"
+                  id="admin-pagination"
+                ></nav>
+                <label>
+                  Показывать по
+                  <select id="page-limit">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                  </select>
+                </label>
+              </div>
+            </section>
+            <section id="artists" data-view hidden>
+              <header class="view-heading">
+                <h1>Артисты</h1>
+                <button class="orange-ticket" data-create="artist">
+                  ＋ Добавить артиста
+                </button>
+              </header>
+              <div id="admin-artists"></div>
+              <p id="no-artists" hidden>Артистов пока нет.</p>
+            </section>
+            <section id="users" data-view hidden>
+              <header class="view-heading"><h1>Пользователи</h1></header>
+              <ul id="admin-users"></ul>
+            </section>
+            <section id="stats" data-view hidden>
+              <header class="view-heading"><h1>Статистика</h1></header>
+              <dl class="admin-metrics">
+                <div>
+                  <dt>Опубликованные концерты</dt>
+                  <dd data-metric="active"></dd>
+                </div>
+                <div>
+                  <dt>Отменённые концерты</dt>
+                  <dd data-metric="cancelled"></dd>
+                </div>
+                <div>
+                  <dt>Мест в действующих бронях</dt>
+                  <dd data-metric="sold"></dd>
+                </div>
+                <div>
+                  <dt>Отмечено входов</dt>
+                  <dd data-metric="used"></dd>
+                </div>
+                <div>
+                  <dt>Пользователи</dt>
+                  <dd data-metric="users"></dd>
+                </div>
+              </dl>
+            </section>
+          </div>
+          <aside class="admin-tools">
+            <section id="gate" class="paper-ticket admin-widget">
+              <h2>Проверка билета</h2>
+              <svg class="gate-mark" aria-hidden="true" viewBox="0 0 48 48">
+                <path
+                  d="M2 13V2h11m22 0h11v11m0 22v11H35m-22 0H2V35"
+                  fill="none"
+                  stroke="#ff580a"
+                  stroke-width="2"
+                />
+                <use href="#i-qr" x="10" y="10" width="28" height="28" />
+              </svg>
+              <button id="scan" type="button" class="orange-ticket">
+                Сканировать камерой
+              </button>
+              <label class="edge-button upload-button">
+                Загрузить QR
+                <input type="file" id="qr-file" accept="image/*" />
+              </label>
+              <div id="reader" hidden>
+                <video
+                  muted
+                  autoplay
+                  playsinline
+                  class="camera-preview"
+                ></video>
+                <button type="button" class="edge-button" id="stop-scan">
+                  Закрыть камеру
+                </button>
+              </div>
+              <p id="camera-status" role="status"></p>
+              <form id="lookup">
+                <label>
+                  Номер билета
+                  <input
+                    required
+                    name="code"
+                    placeholder="XXXX-XXXX-XXXX"
+                    maxlength="24"
+                    autocomplete="off"
+                  />
+                </label>
+                <button class="edge-button">Проверить билет</button>
+              </form>
+              <div id="verdict" role="status">
+                <h3></h3>
+                <p></p>
+                <small></small>
+                <button type="button" class="orange-ticket" id="redeem" hidden>
+                  Активировать билет
+                </button>
+              </div>
+            </section>
+            <section class="paper-ticket admin-widget stats-widget">
+              <h2>
+                <a href="#stats">
+                  Статистика
+                  <svg aria-hidden="true"><use href="#i-chart" /></svg>
+                </a>
+              </h2>
+              <dl class="admin-metrics">
+                <div>
+                  <dt>Концертов</dt>
+                  <dd data-metric="active"></dd>
+                </div>
+                <div>
+                  <dt>Забронировано мест</dt>
+                  <dd data-metric="sold"></dd>
+                </div>
+                <div>
+                  <dt>Пользователей</dt>
+                  <dd data-metric="users"></dd>
+                </div>
+              </dl>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <dialog id="editor" aria-labelledby="editor-title">
+      <div class="editor-head">
+        <h2 id="editor-title"></h2>
+        <form method="dialog">
+          <button class="edge-button" aria-label="Закрыть">×</button>
+        </form>
+      </div>
+      <form id="event-form">
+        <label>
+          Артист
+          <select name="artist" required></select>
+        </label>
+        <label>
+          Площадка
+          <input name="venue" maxlength="100" required />
+        </label>
+        <div class="form-pair">
+          <label>
+            Дата
+            <input type="date" required name="date" />
+          </label>
+          <label>
+            Начало
+            <input type="time" required name="time" />
+          </label>
+        </div>
+        <label>
+          Базовая цена, ₽
+          <input type="number" min="1" max="1000000" name="price" required />
+        </label>
+        <button class="orange-ticket">Сохранить концерт</button>
+      </form>
+      <form id="artist-form" hidden>
+        <label>
+          Имя артиста
+          <input name="name" maxlength="100" required />
+        </label>
+        <label>
+          Жанр
+          <input name="genre" maxlength="100" required />
+        </label>
+        <button class="orange-ticket">Добавить артиста</button>
+      </form>
+      <p id="editor-error" role="alert"></p>
+    </dialog>
+    <template id="event-item">
+      <tr>
+        <th scope="row">
+          <div class="event-name">
+            <img alt="" loading="lazy" />
+            <span></span>
+          </div>
+        </th>
+        <td data-date></td>
+        <td data-venue></td>
+        <td><span class="state-chip"></span></td>
+        <td>
+          <div class="row-actions">
+            <button
+              data-edit-event
+              aria-label="Редактировать"
+              title="Редактировать"
+            >
+              <svg><use href="#i-edit" /></svg>
+            </button>
+            <button
+              data-copy-event
+              aria-label="Создать копию"
+              title="Создать копию"
+            >
+              <svg><use href="#i-copy" /></svg>
+            </button>
+            <button
+              data-remove-event
+              aria-label="Отменить концерт"
+              title="Отменить концерт"
+            >
+              <svg><use href="#i-bin" /></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </template>
+    <template id="artist-item">
+      <article class="artist-line">
+        <img alt="" loading="lazy" />
+        <div>
+          <h2></h2>
+          <p></p>
+        </div>
+        <button data-remove-artist class="edge-button">Удалить</button>
+      </article>
+    </template>
+    <template id="user-item">
+      <li>
+        <strong></strong>
+        <span></span>
+      </li>
+    </template>
+    <template id="page-button"><button type="button"></button></template>
+    <svg class="icon-library" aria-hidden="true">
+      <defs>
+        <symbol id="i-ticket" viewBox="0 0 24 24">
+          <path d="M2 5h20v5a2 2 0 0 0 0 4v5H2v-5a2 2 0 0 0 0-4z" />
+        </symbol>
+        <symbol id="i-person" viewBox="0 0 24 24">
+          <circle cx="12" cy="7" r="4" />
+          <path d="M3 22c0-10 18-10 18 0" />
+        </symbol>
+        <symbol id="i-qr" viewBox="0 0 24 24">
+          <path
+            d="M2 2h7v7H2zm13 0h7v7h-7zM2 15h7v7H2zm12-2h3v4h5v5h-3v-2m-6-1v3m8-10h2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+        </symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24">
+          <path d="M3 21v-7m6 7V9m6 12V2m6 19V6" />
+        </symbol>
+        <symbol id="i-edit" viewBox="0 0 24 24">
+          <path d="m3 21 1-6L17 2l5 5L9 20zM14 5l5 5" />
+        </symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24">
+          <rect x="8" y="8" width="13" height="13" rx="2" />
+          <path d="M15 5V3H3v12h2" />
+        </symbol>
+        <symbol id="i-bin" viewBox="0 0 24 24">
+          <path d="M2 5h20M9 5V2h6v3M5 6l1 16h12l1-16M10 9v9m4-9v9" />
+        </symbol>
+        <symbol id="i-crown" viewBox="0 0 90 65">
+          <path
+            d="m4 48 17-39 3 32L54 6l-5 37 34-22-23 37z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="5"
+            stroke-linejoin="round"
+          />
+        </symbol>
+      </defs>
+    </svg>
+  </body>
+</html>

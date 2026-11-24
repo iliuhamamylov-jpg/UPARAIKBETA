@@ -1,0 +1,364 @@
+<footer class="site-footer" id="footer">
+  <div class="site-footer__bar">
+    <a class="site-footer__brand" href="index.html" aria-label="Афиша, главная">
+      <img src="assets/hero-logo.jpg" alt="" loading="lazy" />
+      <span>
+        Концерты
+        <br />
+        в городе
+      </span>
+    </a>
+    <nav class="site-footer__nav" aria-label="Навигация в подвале">
+      <a href="index.html" data-page="home">Главная</a>
+      <a href="concerts.html" data-page="catalog">Афиша концертов</a>
+      <a href="profile.html" data-page="profile">Личный кабинет</a>
+    </nav>
+    <div class="site-footer__social">
+      <a href="https://telegram.org/" aria-label="Telegram">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M21.6 3.3 18.3 20c-.2.9-.8 1.1-1.5.7l-5.1-3.8-2.5 2.4.5-5.1 9.1-8.1c.4-.4-.1-.5-.5-.3L7.1 12.9 2.3 11.4c-1-.3-1-1 .2-1.5L20.3 3c.8-.3 1.5-.1 1.3.3Z"
+          />
+        </svg>
+      </a>
+      <a href="https://vk.com/" aria-label="ВКонтакте">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M1 5h4c.5 4 2.9 8.2 5.1 9.2V5h3.8v5.4c2.2-.2 4.5-3 5.1-5.4h4c-.8 3.2-3.3 6.3-5.3 7.7 2 1 4.7 3.8 5.8 6.5h-4.4c-1-2.1-3.1-4.5-5.2-4.8v4.8h-.8C6.3 19.2 2 14.5 1 5Z"
+          />
+        </svg>
+      </a>
+      <a href="https://www.youtube.com/" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m7 4 13 8-13 8z" />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="site-footer__fine">
+    <small>© 2026 Афиша. Все права защищены.</small>
+    <div class="site-footer__documents">
+      <button type="button" aria-haspopup="dialog" aria-controls="privacy-info">
+        Политика конфиденциальности
+      </button>
+      <span aria-hidden="true">•</span>
+      <button
+        type="button"
+        aria-haspopup="dialog"
+        aria-controls="booking-terms"
+      >
+        Пользовательское соглашение
+      </button>
+    </div>
+  </div>
+  <dialog
+    class="footer-document"
+    id="privacy-info"
+    aria-labelledby="privacy-heading"
+  >
+    <h2 id="privacy-heading">Политика конфиденциальности</h2>
+    <p>
+      В личном кабинете хранятся имя, электронная почта и указанный вами
+      телефон. С аккаунтом связаны избранные концерты, бронирования и билеты.
+    </p>
+    <p>
+      Для входа сайт использует cookie сеанса. Посмотреть и изменить контактные
+      данные можно в личном кабинете.
+    </p>
+    <form method="dialog"><button>Закрыть</button></form>
+  </dialog>
+  <dialog
+    class="footer-document"
+    id="booking-terms"
+    aria-labelledby="terms-heading"
+  >
+    <h2 id="terms-heading">Пользовательское соглашение</h2>
+    <p>
+      Перед подтверждением бронирования проверьте дату концерта, выбранные места
+      и итоговую стоимость. Билеты сохраняются в личном кабинете.
+    </p>
+    <p>
+      При входе предъявите QR-код или номер билета. После активации билет
+      считается использованным.
+    </p>
+    <form method="dialog"><button>Закрыть</button></form>
+  </dialog>
+</footer>
+<svg aria-hidden="true" width="0" height="0" class="icon-library">
+  <defs>
+    <symbol id="icon-cal" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M7 2v6m10-6v6M3 11h18" />
+    </symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24">
+      <path d="M19 10c0 5-7 12-7 12S5 15 5 10a7 7 0 1 1 14 0Z" />
+      <circle cx="12" cy="10" r="2" />
+    </symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24">
+      <path d="m5 5 14 14M19 5 5 19" />
+    </symbol>
+  </defs>
+</svg>
+<template id="concert-card">
+  <article class="card">
+    <img alt="" loading="lazy" />
+    <div class="shade"></div>
+    <div class="card-top">
+      <span class="badge"></span>
+      <strong hidden></strong>
+      <button class="mark" data-fav aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M5 3h14v18l-7-5-7 5z" />
+        </svg>
+      </button>
+    </div>
+    <div class="card-info">
+      <small data-date></small>
+      <h3><button data-open></button></h3>
+      <p>
+        <svg><use href="#icon-pin" /></svg>
+        <span data-venue></span>
+      </p>
+      <span class="price"></span>
+      <small data-count hidden></small>
+    </div>
+  </article>
+</template>
+<template id="event-row">
+  <article class="schedule-ticket">
+    <div class="schedule-ticket__portrait"><img alt="" loading="lazy" /></div>
+    <div class="schedule-ticket__details">
+      <small>Концерт</small>
+      <h4></h4>
+      <p>
+        <time></time>
+        <span aria-hidden="true">·</span>
+        <span data-venue></span>
+      </p>
+    </div>
+    <div class="schedule-ticket__booking">
+      <b data-price></b>
+      <button type="button" data-open>
+        Купить билет
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </article>
+</template>
+<template id="calendar-day"><button type="button" data-day></button></template>
+<template id="filter-choice">
+  <label>
+    <input type="checkbox" />
+    <span></span>
+  </label>
+</template>
+<template id="ticket-row">
+  <article class="paper-ticket account-ticket">
+    <img alt="" loading="lazy" />
+    <div>
+      <h3></h3>
+      <p></p>
+    </div>
+    <div class="account-ticket__info">
+      <span data-seats-label></span>
+      <small data-status></small>
+    </div>
+    <button class="orange-ticket" data-ticket>Посмотреть билет →</button>
+  </article>
+</template>
+<template id="poster">
+  <div class="poster">
+    <svg class="poster__crown" viewBox="0 0 100 72" aria-hidden="true">
+      <path
+        d="M5 51 26 8 27 44 60 7 54 49 92 27 66 64 8 51"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    <img alt="" />
+    <div>
+      <span class="badge">Концерт</span>
+      <strong></strong>
+    </div>
+  </div>
+</template>
+<template id="details">
+  <section class="sheet-body concert-details">
+    <h2 id="panel-title"></h2>
+    <p>Большой сольный концерт. Живой звук и главные хиты.</p>
+    <dl>
+      <div>
+        <dt>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+          >
+            <use href="#icon-cal" />
+          </svg>
+          Дата
+        </dt>
+        <dd data-date></dd>
+      </div>
+      <div>
+        <dt>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 5v7l5 3" />
+          </svg>
+          Время
+        </dt>
+        <dd data-time></dd>
+      </div>
+      <div>
+        <dt>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+          >
+            <use href="#icon-pin" />
+          </svg>
+          Площадка
+        </dt>
+        <dd data-venue></dd>
+      </div>
+    </dl>
+    <h3>Об артисте</h3>
+    <p data-artist></p>
+    <div class="buy-row">
+      <b></b>
+      <button class="pill" data-seats>Выбрать место →</button>
+    </div>
+  </section>
+</template>
+<template id="hall">
+  <section class="sheet-body">
+    <h2 id="panel-title">Выбор мест</h2>
+    <small>1　Выбор мест　　 2　Подтверждение　　 3　Готово</small>
+    <div class="seat-layout">
+      <div class="hall">
+        <div class="stage">С Ц Е Н А</div>
+        <div data-rows></div>
+        <p class="legend">
+          ■ Свободно　
+          <em>■ Выбрано</em>
+          　 × Занято
+        </p>
+      </div>
+      <aside>
+        <small></small>
+        <h3>Выбранные места</h3>
+        <div data-selected aria-live="polite"></div>
+        <hr />
+        <b></b>
+        <button class="pill" data-confirm>Продолжить</button>
+      </aside>
+    </div>
+  </section>
+</template>
+<template id="seat-row">
+  <div class="seat-line"><small></small></div>
+</template>
+<template id="seat">
+  <button class="seat" data-seat aria-pressed="false"></button>
+</template>
+<template id="confirmation">
+  <section class="sheet-body">
+    <h2 id="panel-title">Подтверждение брони</h2>
+    <h3></h3>
+    <p data-meta></p>
+    <p data-selected></p>
+    <div class="buy-row">
+      <b></b>
+      <button class="pill" data-book>Забронировать</button>
+    </div>
+  </section>
+</template>
+<template id="booked">
+  <section class="sheet-body">
+    <h2 id="panel-title">Места забронированы</h2>
+    <a class="pill" href="profile.html">Открыть мои билеты</a>
+  </section>
+</template>
+<template id="ticket-detail">
+  <section class="sheet-body">
+    <h2 id="panel-title">Ваш билет</h2>
+    <h3></h3>
+    <p data-meta></p>
+    <div data-admissions></div>
+    <b data-price></b>
+    <hr />
+    <b data-status></b>
+    <button class="pill" data-cancel>Отменить бронь</button>
+  </section>
+</template>
+<template id="admission">
+  <section class="admission">
+    <h3></h3>
+    <p>
+      Билет №
+      <strong></strong>
+    </p>
+    <b></b>
+    <img width="150" height="150" alt="QR-код билета" hidden />
+    <button type="button" class="pill" data-sell hidden></button>
+  </section>
+</template>
+<template id="edit-profile">
+  <form id="edit" class="sheet-body">
+    <h2 id="panel-title">Личные данные</h2>
+    <label>
+      Имя
+      <input required maxlength="100" name="name" />
+    </label>
+    <label>
+      Email
+      <input required type="email" name="email" maxlength="100" />
+    </label>
+    <label>
+      Телефон
+      <input name="phone" type="tel" maxlength="40" />
+    </label>
+    <button class="pill">Сохранить</button>
+  </form>
+</template>
+<template id="auth-form">
+  <form class="sheet-body" id="auth">
+    <h2 id="panel-title"></h2>
+    <label data-name>
+      Имя
+      <input name="name" maxlength="100" autocomplete="name" />
+    </label>
+    <label>
+      Email
+      <input required type="email" name="email" autocomplete="username" />
+    </label>
+    <label>
+      Пароль
+      <input
+        required
+        type="password"
+        name="password"
+        minlength="8"
+        maxlength="256"
+      />
+    </label>
+    <p role="alert"></p>
+    <button class="pill"></button>
+    <button type="button" class="auth-switch"></button>
+  </form>
+</template>

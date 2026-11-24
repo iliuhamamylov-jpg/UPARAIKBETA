@@ -1,0 +1,3437 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --ink: #111014;
+  --accent: #8225f7;
+  --line: #dedce2;
+  --soft: #f5f4f6;
+  font-family: Arial, "Segoe UI", sans-serif;
+  color: var(--ink);
+}
+body {
+  margin: 0;
+}
+body[data-page] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+body[data-page] > main {
+  flex-grow: 1;
+  min-width: 0;
+}
+a,
+button {
+  color: inherit;
+}
+a {
+  text-decoration: none;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #ac6aff;
+  outline-offset: 3px;
+}
+svg {
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+img {
+  display: block;
+  object-fit: cover;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+button,
+a,
+input {
+  touch-action: manipulation;
+}
+#header {
+  display: flex;
+  align-items: center;
+  padding: 0 5.3%;
+  height: clamp(70px, 6.6vw, 110px);
+  gap: 1.4vw;
+  border-bottom: 1px solid #efedf0;
+}
+.logo {
+  font-size: clamp(23px, 2.3vw, 40px);
+  font-weight: 1000;
+  letter-spacing: -0.055em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.37em;
+}
+.logo i {
+  width: 1.25em;
+  height: 0.68em;
+  transform: skew(-29deg);
+  background: linear-gradient(
+    90deg,
+    #9f45fc 0 62%,
+    transparent 62% 69%,
+    #7922ec 69%
+  );
+}
+.slogan {
+  border-left: 1px solid #777;
+  padding-left: 1.5vw;
+  font-size: clamp(10px, 0.82vw, 15px);
+  line-height: 1.12;
+  font-weight: 600;
+}
+nav,
+.tools {
+  display: flex;
+  align-items: center;
+}
+nav {
+  gap: clamp(16px, 4vw, 70px);
+  font-weight: 650;
+}
+#header nav {
+  margin: auto;
+}
+nav a {
+  position: relative;
+  padding-block: 0.65em;
+}
+nav a[aria-current="page"]:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+}
+.tools {
+  gap: 1.4vw;
+  font-size: 22px;
+}
+.tools a + a {
+  border-left: 1px solid #aaa;
+  padding-left: 1.4vw;
+}
+.hero {
+  position: relative;
+  isolation: isolate;
+  background: #100d16;
+  color: white;
+  min-height: 400px;
+  height: min(46vw, 800px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-photo,
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.hero-photo {
+  left: auto;
+  width: 62%;
+  height: 100%;
+  object-position: 50% 39%;
+}
+.hero-shade {
+  background:
+    linear-gradient(
+      90deg,
+      #0e0c12 12%,
+      #110e17 34%,
+      #100d16bb 47%,
+      transparent 71%
+    ),
+    linear-gradient(0deg, #160e2850, transparent 42%);
+}
+.hero-copy {
+  margin: 0 9.7%;
+  max-width: 73%;
+}
+.hero-copy > span {
+  font-size: clamp(13px, 1.3vw, 22px);
+  letter-spacing: 0.28em;
+}
+.hero h1,
+.card h3,
+.poster strong {
+  font-family: Impact, "Arial Narrow", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.99;
+  letter-spacing: -0.018em;
+}
+.hero h1 {
+  font-size: clamp(65px, 9.5vw, 164px);
+  margin: 0.2em 0;
+}
+.hero-copy p,
+.hero-buy,
+.pill,
+.price,
+.circle,
+.card-info p,
+.heading a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+}
+.hero-copy p {
+  font-size: clamp(15px, 1.5vw, 25px);
+  font-weight: 650;
+}
+.hero-copy p i {
+  border-left: 1px solid #aaa;
+  height: 1.2em;
+  margin: 0 0.45em;
+}
+.hero-buy {
+  display: flex;
+  width: fit-content;
+  background: #fff;
+  color: #111;
+  padding: 0.85em 2.3em;
+  margin-top: 1.6em;
+  font-weight: 700;
+  font-size: clamp(17px, 1.5vw, 25px);
+  gap: 1.25em;
+}
+.circle {
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  width: 2.7em;
+  height: 2.7em;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.circle:hover {
+  background: #8883;
+}
+.hero > .circle {
+  position: absolute;
+  top: 47%;
+  color: white;
+}
+.hero > [data-slide="-1"] {
+  left: 2%;
+}
+.hero > [data-slide="1"] {
+  right: 2%;
+}
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  position: absolute;
+  bottom: 5.5%;
+  left: 5.3%;
+  font-size: 14px;
+}
+.progress b {
+  font-size: 21px;
+}
+.progress button {
+  width: clamp(22px, 4vw, 65px);
+  padding: 8px 0;
+  background: transparent;
+}
+.progress button:before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: #777;
+  border-radius: 4px;
+}
+.progress button.on:before {
+  background: white;
+}
+.block {
+  width: min(100%, 1800px);
+  padding: clamp(38px, 4.4vw, 80px) 3.2%;
+  margin: auto;
+}
+.heading,
+.between,
+.month,
+.buy-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.heading {
+  justify-content: flex-start;
+  margin: 0 1% 2.5vw;
+}
+.heading h1,
+.heading h2 {
+  font-size: clamp(37px, 4.5vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+  text-transform: uppercase;
+  font-weight: 950;
+}
+.heading p {
+  max-width: 280px;
+  border-left: 1px solid;
+  padding: 0 0 0 24px;
+  color: #77737c;
+  font-size: 14px;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  font-weight: 650;
+}
+.heading a,
+.heading select {
+  margin-left: auto;
+  font-weight: 650;
+}
+.grid,
+.rank-first,
+.rank-rest,
+.results {
+  display: grid;
+  gap: clamp(9px, 1vw, 20px);
+}
+.grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: clamp(12px, 1.5vw, 25px);
+  background: #16131a;
+  color: white;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  aspect-ratio: 0.67;
+  padding: clamp(15px, 2vw, 34px);
+}
+.card > img,
+.shade,
+.poster > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  z-index: -2;
+}
+.card > img {
+  transition: transform 0.35s;
+  object-position: center 30%;
+}
+.card:hover > img {
+  transform: scale(1.035);
+}
+.shade {
+  z-index: -1;
+  background:
+    linear-gradient(0deg, #09080cf5, #100e1599 44%, transparent 78%),
+    linear-gradient(110deg, #12101644, transparent 55%);
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.badge {
+  display: inline-flex;
+  background: var(--accent);
+  padding: 0.4em 0.85em;
+  color: white;
+  border-radius: 7px;
+  font-size: clamp(11px, 0.88vw, 15px);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.mark {
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding: 1px;
+  font-size: 20px;
+}
+.mark[aria-pressed="true"] svg {
+  fill: var(--accent);
+}
+.card h3 {
+  font-size: clamp(27px, 3.1vw, 58px);
+  margin: 0.17em 0;
+  overflow-wrap: anywhere;
+}
+.card h3 button {
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  padding: 0;
+}
+.card h3 button:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.card-info small {
+  font-size: clamp(12px, 1.1vw, 18px);
+}
+.card-info p {
+  display: flex;
+  font-weight: 600;
+  margin: 0.65em 0 1em;
+}
+.price,
+.pill {
+  background: white;
+  border-radius: 99px;
+  color: #111;
+  padding: 0.65em 1.15em;
+  font-weight: 700;
+  width: fit-content;
+}
+.carousel-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 20px;
+}
+.cal-layout,
+.catalog-layout {
+  display: grid;
+  gap: 2.4vw;
+  grid-template-columns: 37% minmax(0, 1fr);
+}
+.calendar-box,
+#filters,
+.empty {
+  background: var(--soft);
+  border-radius: 19px;
+  padding: clamp(18px, 2vw, 32px);
+}
+.month b {
+  text-transform: capitalize;
+  font-size: 22px;
+}
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  text-align: center;
+  gap: 4px;
+  margin-top: 20px;
+}
+.days small {
+  color: #777;
+  padding: 12px 0;
+}
+.days button {
+  aspect-ratio: 1.1;
+  border-radius: 8px;
+  position: relative;
+}
+.has-show:after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 8%;
+  left: 48%;
+  background: currentColor;
+}
+.rank-first {
+  grid-template-columns: repeat(3, 1fr);
+}
+.rank-rest {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  margin-top: 1.3vw;
+}
+.rank-card {
+  aspect-ratio: 1.5;
+}
+.rank-card .card-top strong {
+  font-size: clamp(24px, 4vw, 66px);
+  font-weight: 950;
+}
+.rank-rest .card {
+  aspect-ratio: 0.78;
+  padding: 1.1vw;
+}
+.rank-rest h3 {
+  font-size: clamp(17px, 1.65vw, 30px);
+}
+.rank-rest small {
+  font-size: 12px;
+}
+.rank-rest .card-top strong {
+  font-size: 26px;
+}
+.catalog-layout {
+  grid-template-columns: minmax(200px, 20%) minmax(0, 1fr);
+}
+.catalog .heading select {
+  border: 0;
+  background: var(--soft);
+  padding: 12px;
+  border-radius: 10px;
+}
+#filters {
+  align-self: start;
+}
+.between h2 {
+  font-size: 21px;
+}
+.between button {
+  text-decoration: underline;
+  font-size: 13px;
+}
+fieldset {
+  margin: 24px 0 0;
+  padding: 10px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+legend {
+  font-weight: 750;
+  padding-right: 12px;
+}
+fieldset label {
+  display: block;
+  padding: 5px 0;
+}
+input {
+  accent-color: var(--accent);
+}
+input[type="date"],
+input[type="range"] {
+  width: 100%;
+  margin-top: 8px;
+}
+input[type="date"] {
+  border: 1px solid var(--line);
+  padding: 8px;
+  border-radius: 7px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--soft);
+  border-radius: 35px;
+  padding: 13px 20px;
+  margin-bottom: 16px;
+}
+.search input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+.results {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: dense;
+}
+.results .card {
+  aspect-ratio: auto;
+  min-height: clamp(245px, 21vw, 370px);
+}
+.results .card:first-child {
+  grid-column: span 2;
+}
+.results .card:first-child img {
+  object-position: 50% 33%;
+}
+.results .card h3 {
+  font-size: clamp(24px, 2.5vw, 46px);
+}
+.profile h2 {
+  font-size: clamp(28px, 3vw, 48px);
+  margin: 38px 0 18px;
+  letter-spacing: -0.04em;
+}
+.profile-banner,
+.ticket {
+  color: white;
+  border-radius: 24px;
+  background: #1c1426;
+}
+.profile-banner {
+  padding: 3.2vw;
+  background:
+    linear-gradient(90deg, #17121ff7, #22172ce6 42%, #26123266),
+    url(assets/crowd.jpg) center 35% / cover no-repeat;
+}
+.profile-banner h1 {
+  font-size: clamp(34px, 3.5vw, 60px);
+}
+.profile-banner > p {
+  margin: 6px 0 22px;
+  color: #d9d3df;
+}
+.identity,
+.ticket {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+}
+.identity img {
+  border-radius: 50%;
+  height: 95px;
+  width: 95px;
+  border: 2px solid white;
+}
+.identity strong {
+  font-size: 30px;
+  margin-right: auto;
+}
+.identity span {
+  background: #251c2ddd;
+  border: 1px solid #ffffff35;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+.identity b {
+  display: block;
+  margin-top: 4px;
+  font-size: 16px;
+}
+.ticket {
+  margin: 12px 0;
+  padding: 16px 2vw 16px 16px;
+}
+.ticket img {
+  width: 16%;
+  aspect-ratio: 1.8;
+  border-radius: 12px;
+}
+.ticket h3 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+.ticket .pill {
+  margin-left: auto;
+}
+.empty a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.pill {
+  background: var(--accent);
+  color: white;
+  justify-content: center;
+}
+dialog {
+  padding: 0;
+  border: 1px solid #51495b;
+  border-radius: 22px;
+  width: min(94vw, 1050px);
+  max-width: 96vw;
+  max-height: 90dvh;
+  background: #19171e;
+  color: white;
+}
+dialog.wide {
+  width: min(96vw, 1400px);
+}
+dialog::backdrop {
+  background: #171320ad;
+  backdrop-filter: blur(7px);
+}
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+.sheet {
+  position: relative;
+  display: flex;
+}
+.sheet > .circle {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 5;
+  border: 0;
+  background: #17131ac9;
+}
+.sheet-body {
+  flex: 1;
+  min-width: 0;
+  padding: clamp(25px, 3.3vw, 52px);
+}
+.sheet-body h2 {
+  font-size: clamp(26px, 2.8vw, 46px);
+  padding-right: 20px;
+  letter-spacing: -0.035em;
+}
+.sheet-body h3 {
+  margin: 22px 0 8px;
+}
+.sheet-body p,
+.sheet-body dt {
+  color: #ccc5d2;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+.sheet-body hr,
+dl,
+.buy-row {
+  border: 0;
+  border-top: 1px solid #ffffff26;
+}
+.poster {
+  width: 35%;
+  position: relative;
+  isolation: isolate;
+  min-height: 360px;
+  display: flex;
+  align-items: flex-end;
+  padding: 2vw;
+}
+.poster:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #100b18, transparent);
+  z-index: -1;
+}
+.poster strong {
+  display: block;
+  font-size: clamp(32px, 3.6vw, 62px);
+  margin-top: 12px;
+}
+.buy-row,
+dl {
+  padding-top: 20px;
+  margin-top: 25px;
+}
+.buy-row b {
+  font-size: 25px;
+}
+dl {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+dd {
+  margin: 0;
+  font-weight: bold;
+}
+.wide .poster {
+  width: 20%;
+}
+.seat-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+.hall,
+.seat-layout aside {
+  border: 1px solid #494150;
+  border-radius: 16px;
+  padding: 14px;
+  min-width: 0;
+}
+.stage {
+  text-align: center;
+  background: radial-gradient(ellipse at bottom, #643ca4, #251d31 78%);
+  border-bottom: 2px solid #9957d0;
+  border-radius: 0 0 50% 50%;
+  padding: 15px;
+  margin: 0 8% 20px;
+  font-weight: bold;
+}
+.seat-line {
+  display: grid;
+  grid-template-columns: 16px repeat(16, minmax(0, 1fr));
+  gap: 3px;
+  margin: 5px 0;
+  align-items: center;
+}
+.seat {
+  padding: 0;
+  background: #b7a1d4;
+  border-radius: 4px;
+  aspect-ratio: 1;
+}
+.seat:disabled {
+  background: #4b4553;
+}
+.seat[aria-pressed="true"] {
+  background: #a23cff;
+  outline: 1px solid white;
+}
+.seat-layout .pill {
+  margin-top: 18px;
+}
+.legend {
+  font-size: 12px;
+}
+.legend em {
+  color: #be86ff;
+}
+.sheet-body label {
+  display: block;
+  margin: 16px 0;
+}
+.sheet-body label input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 0;
+}
+@media (max-width: 900px) {
+  .slogan {
+    display: none;
+  }
+  .rank-rest {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .rank-rest .card {
+    padding: 14px;
+  }
+  .card-info p {
+    font-size: 14px;
+  }
+  .seat-layout {
+    grid-template-columns: 1fr;
+  }
+  .wide .poster {
+    width: 23%;
+  }
+  .identity {
+    flex-wrap: wrap;
+  }
+  .heading p {
+    display: none;
+  }
+  .catalog-layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+  .results {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  #header {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 13px 5% 4px;
+    gap: 8px;
+  }
+  .tools {
+    margin-left: auto;
+  }
+  .tools a {
+    padding: 4px 9px;
+  }
+  #header nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+  .hero {
+    height: 108vw;
+    min-height: 390px;
+    max-height: 520px;
+  }
+  .hero-photo {
+    width: 100%;
+    object-position: center 30%;
+  }
+  .hero-shade {
+    background: linear-gradient(0deg, #0a0712 0%, #110b18a3 49%, #0001 92%);
+  }
+  .hero-copy {
+    align-self: flex-end;
+    margin: 0 6% 62px;
+    max-width: 90%;
+  }
+  .hero h1 {
+    font-size: clamp(48px, 13vw, 78px);
+  }
+  .hero-copy p {
+    flex-wrap: wrap;
+    gap: 0.4em;
+    font-size: 14px;
+  }
+  .hero-buy {
+    margin-top: 16px;
+  }
+  .hero > .circle {
+    top: 16%;
+    width: 33px;
+    height: 33px;
+  }
+  .progress {
+    bottom: 20px;
+  }
+  .heading {
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .heading a {
+    font-size: 14px;
+  }
+  .grid,
+  .rank-first,
+  .rank-rest {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .card {
+    padding: 12px;
+    aspect-ratio: 0.62;
+  }
+  .card h3 {
+    font-size: clamp(22px, 6vw, 32px);
+  }
+  .card-info p {
+    font-size: 13px;
+    margin: 6px 0;
+  }
+  .price {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  .rank-first .card:first-child {
+    grid-column: span 2;
+  }
+  .rank-first .card,
+  .rank-rest .card {
+    aspect-ratio: 1.15;
+  }
+  .cal-layout,
+  .catalog-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .days button {
+    aspect-ratio: 1.6;
+  }
+  .calendar-box {
+    padding: 16px;
+  }
+  .catalog fieldset {
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    margin-top: 14px;
+  }
+  .catalog #filters {
+    padding: 16px;
+  }
+  .results .card {
+    min-height: 235px;
+  }
+  .profile-banner {
+    padding: 22px;
+  }
+  .identity img {
+    width: 65px;
+    height: 65px;
+  }
+  .identity span {
+    padding: 9px;
+  }
+  .identity strong {
+    flex-basis: 50%;
+  }
+  .ticket {
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+  .ticket img {
+    width: 27%;
+  }
+  .ticket p {
+    font-size: 13px;
+  }
+  .ticket .pill {
+    margin: 0;
+  }
+  .sheet {
+    display: block;
+  }
+  .poster,
+  .wide .poster {
+    width: 100%;
+    min-height: 140px;
+    height: 150px;
+    padding: 18px;
+  }
+  .poster > img {
+    object-position: center 31%;
+  }
+  .wide .poster {
+    display: none;
+  }
+  .sheet-body {
+    padding: 25px 16px;
+  }
+  .sheet-body dl {
+    gap: 12px;
+  }
+  .buy-row {
+    flex-wrap: wrap;
+  }
+  .seat-layout {
+    gap: 8px;
+  }
+  .hall {
+    padding: 8px;
+  }
+  .seat-line {
+    gap: 2px;
+  }
+}
+.manage h1 {
+  font-size: clamp(36px, 4vw, 64px);
+  letter-spacing: -0.045em;
+}
+.manage h2 {
+  margin: 24px 0 12px;
+}
+.manage-forms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 20px;
+}
+.manage form {
+  padding: 24px;
+  border-radius: 18px;
+  background: var(--soft);
+  align-self: start;
+}
+.manage form h2 {
+  margin: 0 0 16px;
+}
+.manage label {
+  display: block;
+  margin: 12px 0;
+}
+.manage input,
+.manage select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+}
+.manage-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.manage-row button,
+.auth-switch {
+  text-decoration: underline;
+}
+.auth-switch {
+  margin: 12px;
+}
+.identity {
+  flex-wrap: wrap;
+}
+#notice {
+  margin: 14px 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+.dialog-content,
+.slide-buttons {
+  display: contents;
+}
+[data-selected] {
+  white-space: pre-line;
+}
+.admission {
+  margin: 18px 0;
+}
+svg:has(use) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+}
+.camera-preview {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+}
+.icon-library {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Главная: афишный слайдер */
+body[data-page="home"] #header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: 4.85vw;
+  min-height: 52px;
+  padding: 0 3.1%;
+  gap: 2vw;
+  background: transparent;
+  color: #f5e8d7;
+  border: 0;
+}
+body[data-page="home"] #header .logo img {
+  width: 11vw;
+  min-width: 110px;
+  height: auto;
+  mix-blend-mode: lighten;
+}
+body[data-page="home"] #header .slogan {
+  border-left: 0;
+  border-right: 1px solid #9a8e80;
+  padding: 0 3.5vw 0 0;
+  font-size: 1vw;
+}
+body[data-page="home"] #header nav {
+  margin: 0 auto 0 8.3vw;
+  gap: 4.5vw;
+  font-size: clamp(13px, 1.15vw, 22px);
+}
+body[data-page="home"] #header nav [aria-current="page"]:after {
+  background: #ff5200;
+}
+body[data-page="home"] #header .tools {
+  font-size: clamp(18px, 1.7vw, 32px);
+}
+/* Единая подложка первого экрана и ленты афиши. */
+.home-playbill {
+  background: #141210 url("assets/top-grain.jpg") left top / 370px 190px repeat;
+}
+.concert-slider {
+  --paper: #f5e6d3;
+  --orange: #ff5100;
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 1779/884;
+  color: var(--paper);
+  background: transparent;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.slide-art,
+.slide-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+.slide-caption h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+.slide-caption > span,
+.slide-caption p,
+.ticket-cutout {
+  position: absolute;
+  left: 8.45%;
+}
+.slide-caption > span {
+  top: 27.8%;
+  font-size: 1.14vw;
+  letter-spacing: 0.23em;
+}
+.slide-caption p {
+  top: 65.4%;
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.31vw;
+  line-height: 1.35;
+}
+.slide-caption p svg {
+  height: 1.35em;
+  width: 1.35em;
+}
+.slide-caption p i {
+  height: 1.35em;
+  border-left: 1px solid var(--paper);
+  margin: 0 0.8vw;
+}
+.ticket-cutout {
+  top: 74.3%;
+  width: 21.15%;
+  height: 10.2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6vw;
+  background: var(--orange);
+  color: #17110c;
+  text-transform: uppercase;
+  font-family: Impact, "Arial Narrow", sans-serif;
+  font-size: 2.1vw;
+  border-radius: 3px;
+  mask:
+    radial-gradient(
+        circle at left center,
+        transparent 0 0.67vw,
+        #000 calc(0.67vw + 1px)
+      )
+      left/51% 100% no-repeat,
+    radial-gradient(
+        circle at right center,
+        transparent 0 0.67vw,
+        #000 calc(0.67vw + 1px)
+      )
+      right/51% 100% no-repeat;
+}
+.ticket-cutout:hover,
+.ticket-cutout:focus-visible {
+  background: #ff702c;
+  color: black;
+}
+.ticket-cutout svg {
+  width: 1em;
+}
+.concert-slider > .circle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.7vw;
+  height: 2.7vw;
+  min-width: 32px;
+  min-height: 32px;
+}
+.concert-slider > [data-slide="-1"] {
+  left: 1%;
+}
+.concert-slider > [data-slide="1"] {
+  right: 1%;
+}
+.slide-position {
+  position: absolute;
+  left: 3.8%;
+  bottom: 3.7%;
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 1.2vw;
+  font-weight: 650;
+}
+.slide-position .slide-buttons {
+  display: flex;
+  gap: 0.4vw;
+  margin-left: 2vw;
+}
+.slide-buttons button {
+  width: 3.8vw;
+  min-height: 24px;
+  padding: 0;
+  background: none;
+  display: grid;
+  align-items: center;
+}
+.slide-buttons button:before {
+  content: "";
+  display: block;
+  height: 3px;
+  border-radius: 5px;
+  background: #988e81;
+}
+.slide-buttons button[aria-pressed="true"]:before {
+  background: var(--orange);
+}
+@media (max-width: 700px) {
+  body[data-page="home"] #header {
+    position: relative;
+    height: auto;
+    background: #14120f;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 5% 4px;
+    gap: 5px;
+  }
+  body[data-page="home"] #header .slogan {
+    display: none;
+  }
+  body[data-page="home"] #header nav {
+    order: 3;
+    width: 100%;
+    margin: 0;
+    font-size: 14px;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  body[data-page="home"] #header .tools {
+    margin-left: auto;
+  }
+  .concert-slider {
+    aspect-ratio: auto;
+    height: clamp(460px, 128vw, 630px);
+  }
+  .slide-art img {
+    object-position: 50% 22%;
+    height: 88%;
+  }
+  .concert-slider:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      0deg,
+      transparent 0%,
+      #14120f 13%,
+      #14120fe6 29%,
+      #14120f40 60%,
+      transparent 85%
+    );
+    z-index: -1;
+  }
+  .slide-caption {
+    position: absolute;
+    inset: auto 6% 65px;
+    display: grid;
+    gap: 10px;
+  }
+  .slide-caption h1,
+  .slide-caption > span,
+  .slide-caption p,
+  .ticket-cutout {
+    position: static;
+  }
+  .slide-caption h1 {
+    width: auto;
+    height: auto;
+    clip-path: none;
+    overflow: visible;
+    font:
+      normal clamp(58px, 16vw, 110px) / 1 Impact,
+      "Arial Narrow",
+      sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+  }
+  .slide-caption > span {
+    font-size: 13px;
+  }
+  .slide-caption p {
+    font-size: clamp(12px, 3.45vw, 18px);
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .ticket-cutout {
+    width: 210px;
+    height: 52px;
+    font-size: 24px;
+    gap: 15px;
+    margin-top: 4px;
+    mask:
+      radial-gradient(circle at left, transparent 6px, black 7px) left/51% 100%
+        no-repeat,
+      radial-gradient(circle at right, transparent 6px, black 7px) right/51%
+        100% no-repeat;
+  }
+  .concert-slider > .circle {
+    top: 30%;
+    width: 40px;
+    height: 40px;
+    background: #14120f70;
+  }
+  .concert-slider > [data-slide="-1"] {
+    left: 3%;
+  }
+  .concert-slider > [data-slide="1"] {
+    right: 3%;
+  }
+  .slide-position {
+    left: 6%;
+    bottom: 18px;
+    font-size: 14px;
+  }
+  .slide-position .slide-buttons {
+    gap: 5px;
+    margin-left: 10px;
+  }
+  .slide-buttons button {
+    width: 26px;
+  }
+}
+.concert-slider .slide-art {
+  /* Постер растворяется в общей фактуре под живыми кнопками. */
+  mask-image: linear-gradient(
+    to bottom,
+    black 67%,
+    rgb(0 0 0 / 96%) 73%,
+    rgb(0 0 0 / 77%) 80%,
+    rgb(0 0 0 / 42%) 87%,
+    rgb(0 0 0 / 12%) 94%,
+    transparent 100%
+  );
+  z-index: -2;
+}
+
+/* Топ-события: афиши с бумажным отрывным корешком */
+.top-events {
+  --paper: #f1e6d9;
+  --orange: #ff5200;
+  color: var(--paper);
+  padding: 1.55% 3% 1.9% 3.55%;
+  background: url("assets/top-footer.jpg") 80% bottom / 32% auto no-repeat;
+}
+.top-events__heading,
+.top-events__controls,
+.top-events__arrows,
+.top-events__pages,
+.show-ticket__details,
+.show-ticket__place b,
+.show-ticket__buy {
+  display: flex;
+  align-items: center;
+}
+.top-events__heading {
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin: 0 0 2.35vw 1.1vw;
+}
+.top-events__heading h2 img {
+  width: 32.6vw;
+  max-width: 100%;
+  height: auto;
+  mix-blend-mode: lighten;
+}
+.top-events__all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  border-bottom: 1px solid;
+  padding: 0 0 0.35em;
+  font-size: clamp(0.95rem, 1.28vw, 1.65rem);
+}
+.top-events__all:hover {
+  color: #ff9461;
+}
+.top-events__track {
+  --events-per-page: 5;
+  --gap: 1vw;
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(
+    (100% - (var(--events-per-page) - 1) * var(--gap)) / var(--events-per-page)
+  );
+  gap: var(--gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.top-events__track::-webkit-scrollbar {
+  display: none;
+}
+.show-ticket {
+  min-width: 0;
+  container-type: inline-size;
+  scroll-snap-align: start;
+  border: 1px solid #635a4d66;
+  border-radius: 1.15vw;
+  background: #161310;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.show-ticket__poster {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 320/372;
+  color: var(--paper);
+}
+.show-ticket__portrait {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center 32%;
+  z-index: -2;
+}
+.show-ticket__poster:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, #100e0de6, transparent 48%);
+}
+.show-ticket h3 {
+  position: absolute;
+  bottom: 7%;
+  left: 6.7%;
+  right: 5%;
+  font:
+    normal clamp(1.55rem, 15cqw, 4.8rem) / 0.98 Impact,
+    "Arial Narrow",
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+.show-ticket h3 button {
+  text-align: left;
+  text-transform: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  padding: 0;
+}
+.show-ticket__save {
+  position: absolute;
+  right: 0.55rem;
+  top: 0.55rem;
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  color: white;
+  background: #171411bb;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.show-ticket:hover .show-ticket__save,
+.show-ticket:focus-within .show-ticket__save,
+.show-ticket__save[aria-pressed="true"] {
+  opacity: 1;
+}
+.show-ticket__save[aria-pressed="true"] svg {
+  fill: var(--orange);
+}
+.show-ticket__stub {
+  position: relative;
+  margin-top: auto;
+  padding: 3cqw 7cqw 6cqw;
+  color: #15110e;
+  background: linear-gradient(110deg, #efe6db, #d7cabf);
+  border-top: 0;
+}
+.show-ticket__stub:before {
+  content: "";
+  position: absolute;
+  inset: auto -1px 99% -1px;
+  height: 11cqw;
+  background: url("assets/top-rip.jpg") center / 100% 100% no-repeat;
+  mask-image: linear-gradient(transparent, black 40%);
+}
+.show-ticket__details {
+  gap: 7cqw;
+  min-height: 22cqw;
+  margin-bottom: 4.2cqw;
+}
+.show-ticket time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 23cqw;
+  align-self: stretch;
+  border-right: 1px solid #786c625e;
+  padding-right: 6cqw;
+  text-transform: uppercase;
+  font-size: 5cqw;
+}
+.show-ticket time strong {
+  font:
+    normal 13cqw/1 Impact,
+    "Arial Narrow",
+    sans-serif;
+}
+.show-ticket__place {
+  min-width: 0;
+}
+.show-ticket__place b {
+  gap: 0.45em;
+  line-height: 1.1;
+  font-size: clamp(0.72rem, 5cqw, 1.5rem);
+}
+.show-ticket__place small {
+  display: block;
+  margin-top: 2.6cqw;
+  font-size: 4.9cqw;
+  text-transform: uppercase;
+  color: #71655e;
+  letter-spacing: 0.03em;
+}
+.show-ticket__buy {
+  width: 100%;
+  justify-content: center;
+  gap: 0.65em;
+  min-height: 15cqw;
+  background: var(--orange);
+  color: #17110b;
+  border-radius: 3px;
+  font:
+    normal 6.9cqw/1 Impact,
+    "Arial Narrow",
+    sans-serif;
+  mask:
+    radial-gradient(circle at left center, transparent 2cqw, black 2.3cqw)
+      left/51% 100% no-repeat,
+    radial-gradient(circle at right center, transparent 2cqw, black 2.3cqw)
+      right/51% 100% no-repeat;
+}
+.show-ticket__buy:hover,
+.show-ticket__buy:focus-visible {
+  background: #ff7936;
+}
+.top-events__controls {
+  gap: 1.75vw;
+  margin-top: 1.45vw;
+}
+.top-events__count {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(0.9rem, 1.17vw, 1.4rem);
+}
+.top-events__pages {
+  gap: 0.35vw;
+}
+.top-events__pages button {
+  width: 3.3vw;
+  padding: 12px 0;
+}
+.top-events__pages button:before {
+  content: "";
+  display: block;
+  height: 5px;
+  background: #625d57;
+  border-radius: 10px;
+}
+.top-events__pages button[aria-pressed="true"]:before {
+  background: var(--orange);
+}
+.top-events__arrows {
+  gap: 1.4vw;
+  margin-left: auto;
+}
+.top-events__arrows button {
+  font: 300 clamp(1.7rem, 2.2vw, 3rem) / 1 Arial;
+  width: 3.35vw;
+  height: 3.35vw;
+  min-width: 40px;
+  min-height: 40px;
+}
+@media (max-width: 1050px) {
+  .top-events__track {
+    --events-per-page: 3;
+    --gap: 14px;
+  }
+  .show-ticket {
+    border-radius: 16px;
+  }
+}
+@media (max-width: 650px) {
+  .top-events {
+    padding: 22px 5% 20px;
+  }
+  .top-events__heading {
+    margin: 0 0 20px;
+    gap: 10px;
+  }
+  .top-events__heading h2 img {
+    width: 52vw;
+  }
+  .top-events__all {
+    white-space: nowrap;
+    font-size: 14px;
+    gap: 0.35em;
+  }
+  .top-events__track {
+    --events-per-page: 1;
+    grid-auto-columns: 83%;
+    --gap: 12px;
+  }
+  .top-events__controls {
+    margin-top: 14px;
+    gap: 12px;
+  }
+  .top-events__pages {
+    flex: 1;
+    gap: 2px;
+  }
+  .top-events__pages button {
+    flex: 1;
+    min-width: 0;
+    width: 9px;
+  }
+  .top-events__arrows {
+    gap: 6px;
+  }
+  .top-events__arrows button {
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+@media (hover: none) {
+  .show-ticket__save {
+    opacity: 1;
+  }
+}
+.show-ticket__poster {
+  display: flex;
+  align-items: flex-end;
+}
+.show-ticket h3 {
+  position: static;
+  margin: 0 5% 7% 6.7%;
+}
+.show-ticket h3 button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.show-ticket__save {
+  z-index: 1;
+}
+.show-ticket h3 {
+  margin-bottom: 9%;
+}
+.show-ticket h3 button span {
+  display: inline-block;
+  transform: scaleY(1.48);
+  transform-origin: bottom left;
+}
+.show-ticket__details {
+  gap: 4cqw;
+}
+
+/* Рейтинг исполнителей */
+.artist-chart {
+  --chart-stock: #efe5d9;
+  --chart-orange: #ff560a;
+  --chart-heading: Impact, "Arial Narrow", sans-serif;
+  position: relative;
+  padding: 2.5vw 2.5vw 2vw;
+  color: #131210;
+  background: #f7f2ee url("assets/rank-paper.jpg");
+}
+.artist-chart::before {
+  content: "";
+  position: absolute;
+  inset: -13px 0 auto;
+  height: 14px;
+  background: inherit;
+  clip-path: polygon(
+    0 52%,
+    4% 42%,
+    7% 60%,
+    12% 29%,
+    16% 58%,
+    21% 41%,
+    23% 53%,
+    29% 35%,
+    35% 60%,
+    40% 32%,
+    45% 58%,
+    51% 22%,
+    59% 54%,
+    64% 40%,
+    70% 56%,
+    75% 28%,
+    81% 47%,
+    89% 35%,
+    94% 60%,
+    100% 33%,
+    100% 100%,
+    0 100%
+  );
+  pointer-events: none;
+}
+.artist-chart__header {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.7vw;
+  margin: 0 1.6vw 2.1vw;
+}
+.artist-chart__header h2 {
+  font:
+    1000 clamp(2.5rem, 4.2vw, 6.4rem) / 0.92 "Arial Black",
+    Arial,
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.055em;
+}
+.artist-chart__header h2 span {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+}
+.artist-chart__header h2 img {
+  width: 1.4em;
+  height: 1em;
+  object-fit: contain;
+  filter: contrast(1.4);
+  mix-blend-mode: multiply;
+}
+.artist-chart__header p {
+  align-self: flex-end;
+  border-left: 1px solid;
+  padding: 0.3em 0 0.3em 2.7vw;
+  margin-bottom: 0.25em;
+  font-size: clamp(0.8rem, 1.1vw, 1.5rem);
+  text-transform: uppercase;
+  color: #615e5a;
+}
+.artist-chart__stats {
+  margin: 0 0 1vw auto;
+  padding: 0.4em 0;
+  border-bottom: 1px solid;
+  font-weight: bold;
+  font-size: clamp(0.95rem, 1.28vw, 1.6rem);
+  white-space: nowrap;
+}
+.artist-chart__stats span {
+  margin-left: 0.5em;
+}
+.artist-chart__stats:hover {
+  color: #ad3900;
+}
+.artist-chart__list {
+  display: grid;
+  grid-template-columns: repeat(21, minmax(0, 1fr));
+  gap: 1.25vw 0.9vw;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.chart-ticket {
+  grid-column: span 3;
+  min-width: 0;
+  container-type: inline-size;
+  filter: drop-shadow(0 1px 1px #48382d7a);
+}
+.chart-ticket--lead {
+  grid-column: span 7;
+}
+.chart-ticket article {
+  --notch: clamp(7px, 5cqw, 19px);
+  mask:
+    radial-gradient(
+        circle at top left,
+        transparent var(--notch),
+        black calc(var(--notch) + 1px)
+      )
+      top left,
+    radial-gradient(
+        circle at top right,
+        transparent var(--notch),
+        black calc(var(--notch) + 1px)
+      )
+      top right,
+    radial-gradient(
+        circle at bottom left,
+        transparent var(--notch),
+        black calc(var(--notch) + 1px)
+      )
+      bottom left,
+    radial-gradient(
+        circle at bottom right,
+        transparent var(--notch),
+        black calc(var(--notch) + 1px)
+      )
+      bottom right;
+  mask-repeat: no-repeat;
+  mask-size: 51% 51%;
+  background: var(--chart-stock);
+}
+.chart-ticket__poster {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 1.06;
+  color: #fffaf3;
+  background: #252120;
+}
+.chart-ticket--lead .chart-ticket__poster {
+  aspect-ratio: 2;
+}
+.chart-ticket__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  object-position: center 30%;
+}
+.chart-ticket:not(.chart-ticket--lead) .chart-ticket__photo {
+  filter: grayscale(1);
+}
+.chart-ticket__poster::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      0deg,
+      #0d0c0cf2,
+      rgba(12, 11, 10, 0.68) 24%,
+      transparent 68%
+    ),
+    linear-gradient(125deg, #18151155, transparent 45%);
+}
+.chart-ticket--lead .chart-ticket__poster::after {
+  content: "";
+  position: absolute;
+  inset: 44% 0 0 84%;
+  z-index: -1;
+  background: linear-gradient(115deg, #f4eada 46%, var(--chart-orange) 48%);
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    0 100%,
+    18% 83%,
+    26% 80%,
+    38% 65%,
+    49% 61%,
+    54% 49%,
+    68% 39%,
+    79% 23%,
+    85% 21%
+  );
+}
+.chart-ticket__rank {
+  position: absolute;
+  top: 4%;
+  left: 9%;
+  font: normal 15cqw/1 var(--chart-heading);
+}
+.chart-ticket--lead .chart-ticket__rank {
+  left: 7%;
+  font-size: 13cqw;
+}
+.chart-ticket__save {
+  position: absolute;
+  top: 3%;
+  right: 5%;
+  color: white;
+  width: clamp(32px, 11cqw, 48px);
+  height: clamp(32px, 11cqw, 48px);
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+.chart-ticket__save svg {
+  width: clamp(16px, 7cqw, 26px);
+  height: auto;
+  filter: drop-shadow(0 1px 2px #222);
+}
+.chart-ticket__save[aria-pressed="true"] svg {
+  fill: var(--chart-orange);
+}
+.chart-ticket__caption {
+  position: absolute;
+  inset: auto 6% 8% 9%;
+}
+.chart-ticket--lead .chart-ticket__caption {
+  left: 6%;
+}
+.chart-ticket__caption h3 {
+  font: normal clamp(1.15rem, 12cqw, 3rem) / 1 var(--chart-heading);
+  text-transform: uppercase;
+}
+.chart-ticket--lead h3 {
+  font-size: 8.8cqw;
+}
+.chart-ticket h3 button {
+  text-align: left;
+  padding: 0;
+  text-transform: inherit;
+}
+.chart-ticket h3 button:hover {
+  text-decoration: underline;
+}
+.chart-ticket__caption p {
+  margin-top: 0.45em;
+  font-size: clamp(0.66rem, 6cqw, 1.45rem);
+}
+.chart-ticket--lead .chart-ticket__caption p {
+  font-size: clamp(0.78rem, 3.45cqw, 1.8rem);
+}
+.chart-ticket__stub {
+  position: relative;
+  padding: 4cqw 7cqw 6cqw;
+  display: grid;
+  gap: 4cqw;
+  background: linear-gradient(100deg, #e7dbce, #f5eee7 60%, var(--chart-stock));
+}
+.chart-ticket--lead .chart-ticket__stub {
+  grid-template-columns: minmax(0, 1fr) 43%;
+  align-items: center;
+  gap: 2%;
+  padding: 2.2cqw 2.7cqw 2.6cqw 6cqw;
+}
+.chart-ticket--lead .chart-ticket__stub::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 99%;
+  height: 2cqw;
+  background: var(--chart-stock);
+  clip-path: polygon(
+    0 95%,
+    5% 66%,
+    11% 71%,
+    17% 24%,
+    23% 46%,
+    30% 35%,
+    39% 62%,
+    46% 30%,
+    54% 56%,
+    61% 39%,
+    69% 52%,
+    77% 12%,
+    84% 45%,
+    88% 31%,
+    95% 53%,
+    100% 32%,
+    100% 100%,
+    0 100%
+  );
+}
+.chart-ticket__details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+  font-size: clamp(0.69rem, 6.15cqw, 1.4rem);
+  line-height: 1.1;
+  min-width: 0;
+  min-height: 1.6em;
+}
+.chart-ticket--lead .chart-ticket__details {
+  font-size: clamp(0.85rem, 3.4cqw, 1.5rem);
+}
+.chart-ticket__details time {
+  font: normal 1.3em/1 var(--chart-heading);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.chart-ticket__details [data-venue] {
+  border-left: 1px solid #91857a;
+  padding-left: 6%;
+}
+.chart-ticket__buy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65em;
+  background: var(--chart-orange);
+  color: #17110b;
+  padding: 0.46em 0.5em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font: normal clamp(0.8rem, 7cqw, 1.75rem) / 1 var(--chart-heading);
+  mask:
+    radial-gradient(circle at left, transparent 4px, black 5px) left/51% 100%
+      no-repeat,
+    radial-gradient(circle at right, transparent 4px, black 5px) right/51% 100%
+      no-repeat;
+}
+.chart-ticket--lead .chart-ticket__buy {
+  font-size: clamp(0.9rem, 4cqw, 2rem);
+}
+.chart-ticket__buy:hover,
+.chart-ticket__buy:focus-visible {
+  background: #ff833e;
+}
+.chart-stats {
+  width: min(94vw, 42rem);
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background: #f7f2ee;
+  color: #181411;
+  border: 0;
+  border-radius: 0.75rem;
+}
+.chart-stats header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.chart-stats header h2 {
+  font: normal 2rem/1 var(--chart-heading);
+  text-transform: uppercase;
+}
+.chart-stats table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  text-align: left;
+  font-size: clamp(0.8rem, 2.2vw, 1rem);
+}
+.chart-stats caption {
+  padding-bottom: 1rem;
+  text-align: left;
+  color: #665e55;
+}
+.chart-stats td,
+.chart-stats th {
+  padding: 0.6em 0.25em;
+  border-bottom: 1px solid #d9ccbc;
+}
+.chart-stats tr > :last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 1199px) {
+  .artist-chart__list {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .chart-ticket--lead {
+    grid-column: span 4;
+  }
+}
+@media (max-width: 760px) {
+  .artist-chart {
+    padding: 1.6rem 4% 2rem;
+  }
+  .artist-chart__header {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 0 1.25rem;
+  }
+  .artist-chart__header h2 {
+    width: 100%;
+    font-size: clamp(2.2rem, 8.2vw, 4rem);
+  }
+  .artist-chart__header p {
+    margin: 0;
+    padding-left: 0.6rem;
+    font-size: 0.68rem;
+  }
+  .artist-chart__stats {
+    margin: 0 0 0 auto;
+    font-size: 0.85rem;
+  }
+  .artist-chart__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem 0.7rem;
+  }
+  .chart-ticket {
+    grid-column: span 1;
+  }
+  .chart-ticket--lead {
+    grid-column: 1/-1;
+  }
+}
+
+/* Календарь концертов */
+.concert-calendar {
+  --calendar-orange: #ef4b00;
+  --ticket-edge: polygon(
+    0 0,
+    100% 0,
+    96% 13%,
+    96.5% 16%,
+    92% 31%,
+    91% 31.5%,
+    89% 43%,
+    84% 59%,
+    84.4% 62%,
+    78% 82%,
+    76% 86%,
+    73% 100%,
+    0 100%
+  );
+  padding: clamp(30px, 3.4vw, 76px) 3.1% clamp(42px, 4vw, 85px);
+  color: #131210;
+  background:
+    linear-gradient(to bottom, transparent, #faf7f4 50%),
+    #f7f2ee url("assets/rank-paper.jpg");
+}
+.concert-calendar__header {
+  display: flex;
+  align-items: center;
+  gap: 2.6vw;
+  margin: 0 1.2vw clamp(26px, 3.5vw, 72px);
+}
+.concert-calendar__header h2 {
+  font:
+    1000 clamp(2.55rem, 4.25vw, 6rem) / 0.92 "Arial Black",
+    Arial,
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.06em;
+}
+.concert-calendar__header h2 span {
+  display: flex;
+  align-items: center;
+}
+.concert-calendar__header img {
+  width: 1.4em;
+  height: 1.05em;
+  object-fit: contain;
+  transform: rotate(-11deg) translateY(-0.16em);
+  filter: contrast(1.5);
+  mix-blend-mode: multiply;
+}
+.concert-calendar__header p {
+  max-width: 19em;
+  margin-top: 1.2em;
+  padding-left: 2.25vw;
+  border-left: 1px solid #847e78;
+  font-size: clamp(0.78rem, 1.05vw, 1.45rem);
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+.concert-calendar__header a {
+  margin: 1em 0 0 auto;
+  border-bottom: 2px solid;
+  padding: 0.3em 0;
+  font-size: clamp(0.95rem, 1.25vw, 1.65rem);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.concert-calendar__header a:hover {
+  color: #ab3800;
+}
+.concert-calendar__header a span {
+  margin-left: 0.4em;
+}
+.concert-calendar .cal-layout {
+  align-items: start;
+  grid-template-columns: minmax(0, 36.7fr) minmax(0, 60.8fr);
+  gap: 2.5vw;
+}
+.concert-calendar .calendar-box {
+  background: rgba(227, 215, 205, 0.24);
+  padding: clamp(16px, 2.1vw, 44px) clamp(10px, 1.45vw, 36px) 1.7vw;
+  border-radius: 1.2rem;
+}
+.concert-calendar .month {
+  padding: 0 0.8vw;
+}
+.concert-calendar .month b {
+  font-size: clamp(1.18rem, 1.65vw, 2.4rem);
+}
+.concert-calendar .month .circle {
+  width: clamp(37px, 2.9vw, 55px);
+  height: clamp(37px, 2.9vw, 55px);
+  border: 1px solid #28231e;
+  color: #181613;
+}
+.concert-calendar .days {
+  gap: 0.2vw;
+  margin-top: 1vw;
+}
+.concert-calendar .days small {
+  padding: 0.85em 0 0.65em;
+  font-size: clamp(0.73rem, 0.95vw, 1.15rem);
+  font-weight: bold;
+}
+.concert-calendar .days button {
+  width: 100%;
+  min-height: 40px;
+  aspect-ratio: 1.24;
+  font-size: clamp(0.94rem, 1.24vw, 1.7rem);
+  font-weight: 600;
+  color: #171410;
+}
+.concert-calendar .days button:hover {
+  background: #e9ded3;
+}
+.concert-calendar .days button[aria-pressed="true"] {
+  color: white;
+  background: var(--calendar-orange);
+  mask:
+    radial-gradient(circle at left, transparent 4px, black 5px) left/51% 100%
+      no-repeat,
+    radial-gradient(circle at right, transparent 4px, black 5px) right/51% 100%
+      no-repeat;
+}
+.concert-calendar .days button:focus-visible {
+  outline-offset: -3px;
+}
+.concert-calendar .days button[aria-pressed="true"]:after {
+  display: none;
+}
+#calendar-title {
+  margin: -0.15em 0 0.65em;
+  font-size: clamp(1.55rem, 2.75vw, 3.3rem);
+  letter-spacing: -0.045em;
+}
+#calendar-title span {
+  position: relative;
+  display: inline-block;
+}
+#calendar-title span::after {
+  content: "";
+  position: absolute;
+  bottom: -0.17em;
+  left: 0;
+  width: 80%;
+  height: 0.11em;
+  background: #f3530c;
+  border-radius: 65% 80% 45% 25%;
+  transform: rotate(-1deg);
+}
+#calendar-events {
+  display: grid;
+  gap: clamp(8px, 0.6vw, 16px);
+  font-size: 1.05rem;
+}
+.schedule-ticket {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 28.5% minmax(0, 1fr) 34%;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid #ccc4bf;
+  border-radius: clamp(10px, 1.1vw, 20px);
+  min-height: clamp(105px, 8.7vw, 180px);
+  background: #faf7f480;
+}
+.schedule-ticket__portrait {
+  isolation: isolate;
+  position: relative;
+  background: var(--calendar-orange);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    97% 11%,
+    98% 22%,
+    95.5% 43%,
+    97.6% 57%,
+    96% 77%,
+    98.5% 100%,
+    0 100%
+  );
+}
+.schedule-ticket__portrait::before,
+.schedule-ticket__portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: var(--ticket-edge);
+}
+.schedule-ticket__portrait::before {
+  content: "";
+  background: #ffefe2;
+  transform: translateX(3px);
+}
+.schedule-ticket__portrait img {
+  object-position: center 32%;
+  filter: grayscale(0.93);
+}
+.schedule-ticket__details,
+.schedule-ticket__booking {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.schedule-ticket__details {
+  padding: 0.8vw 1.1vw;
+}
+.schedule-ticket__details small {
+  text-transform: uppercase;
+  font-size: clamp(0.68rem, 0.95vw, 1.25rem);
+}
+.schedule-ticket__details h4 {
+  margin: 0.1em 0 0.18em;
+  overflow-wrap: anywhere;
+  font:
+    normal clamp(1.55rem, 2.7vw, 3.7rem) / 1 Impact,
+    "Arial Narrow",
+    sans-serif;
+  text-transform: uppercase;
+}
+.schedule-ticket__details p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2em 0.5em;
+  font-size: clamp(0.75rem, 1.1vw, 1.45rem);
+}
+.schedule-ticket__booking {
+  align-self: center;
+  gap: 0.75vw;
+  border-left: 1px solid #cec1b6;
+  padding: 0 1.15vw 0 3.3vw;
+}
+.schedule-ticket__booking b {
+  font-size: clamp(1rem, 1.42vw, 2rem);
+}
+.schedule-ticket__booking button {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  color: #fff9ee;
+  background: #e64b00;
+  border-radius: 5px;
+  padding: 0.48em 0.3em;
+  font:
+    normal clamp(1rem, 1.58vw, 2.3rem) / 1 Impact,
+    "Arial Narrow",
+    sans-serif;
+  text-transform: uppercase;
+  mask:
+    radial-gradient(circle at left, transparent 5px, black 6px) left/51% 100%
+      no-repeat,
+    radial-gradient(circle at right, transparent 5px, black 6px) right/51% 100%
+      no-repeat;
+}
+.schedule-ticket__booking button:hover,
+.schedule-ticket__booking button:focus-visible {
+  background: #b83900;
+}
+/* Общий подвал публичных страниц */
+.site-footer {
+  --footer-tear: polygon(
+    0 0,
+    100% 0,
+    100% 15%,
+    96% 23%,
+    95% 21%,
+    91% 27%,
+    86% 25%,
+    82% 32%,
+    79% 31%,
+    75% 39%,
+    71% 38%,
+    67% 45%,
+    60% 43%,
+    57% 49%,
+    51% 50%,
+    46% 59%,
+    44% 58%,
+    41% 65%,
+    35% 63%,
+    32% 69%,
+    27% 67%,
+    23% 76%,
+    19% 74%,
+    15% 83%,
+    10% 82%,
+    6% 90%,
+    3% 89%,
+    0 100%
+  );
+  position: relative;
+  isolation: isolate;
+  padding: clamp(90px, 14.9vw, 320px) 4% clamp(68px, 9.4vw, 205px);
+  background:
+    url("assets/footer-upper.jpg") left top / 19% auto no-repeat,
+    url("assets/footer-lower.jpg") right bottom / 39% auto no-repeat,
+    #12110f url("assets/top-grain.jpg");
+  background-blend-mode: lighten, lighten, normal;
+  color: #f8f4ee;
+}
+.site-footer::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+}
+.site-footer::before {
+  inset: -1px 0 auto;
+  height: clamp(13px, 2vw, 38px);
+  background: #faf7f4;
+  clip-path: var(--footer-tear);
+}
+body:not([data-page="home"]) .site-footer::before {
+  background: white;
+}
+.site-footer__bar {
+  display: grid;
+  grid-template-columns: 27.4% minmax(0, 1fr) 18.5%;
+  align-items: center;
+  padding-top: 2.15vw;
+  border-top: 1px solid #aaa39c;
+  position: relative;
+}
+.site-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 1.15vw;
+  width: fit-content;
+}
+.site-footer__brand img {
+  width: clamp(100px, 11.7vw, 255px);
+  height: auto;
+  mix-blend-mode: lighten;
+}
+.site-footer__brand span {
+  font:
+    normal clamp(0.8rem, 1.13vw, 1.6rem) / 1.15 "Arial Narrow",
+    Arial,
+    sans-serif;
+  text-transform: uppercase;
+  border-left: 1px solid #afa9a0;
+  padding-left: 1.15vw;
+}
+.site-footer__nav {
+  justify-content: space-evenly;
+  gap: 1vw;
+  border-inline: 1px solid #aaa39b;
+  padding: 0.25em 1vw;
+  font-size: clamp(0.9rem, 1.3vw, 1.85rem);
+}
+.site-footer__nav a[aria-current="page"] {
+  color: #fff;
+}
+.site-footer__nav a[aria-current="page"]::after {
+  background: var(--calendar-orange, #f55511);
+  height: 2px;
+  bottom: 0.33em;
+}
+.site-footer__social {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.45vw;
+}
+.site-footer__social a {
+  width: clamp(35px, 2.8vw, 63px);
+  height: clamp(35px, 2.6vw, 60px);
+  border: 2px solid currentColor;
+  border-radius: 22%;
+  display: grid;
+  place-items: center;
+}
+.site-footer__social svg {
+  width: 58%;
+  height: 58%;
+  fill: currentColor;
+}
+.site-footer__fine {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2.15vw;
+  color: #c8c2bc;
+  font-size: clamp(0.75rem, 1vw, 1.45rem);
+}
+.site-footer__fine small {
+  font-size: inherit;
+}
+.site-footer__documents {
+  display: flex;
+  align-items: center;
+  gap: 1.5vw;
+}
+.site-footer__documents button {
+  padding: 0.4em 0;
+  text-align: left;
+}
+.site-footer a:hover,
+.site-footer__documents button:hover {
+  color: #ff8d50;
+}
+.footer-document {
+  width: min(92vw, 36rem);
+  border: 0;
+  border-radius: 1rem;
+  background: #faf6f1;
+  color: #211c19;
+  padding: clamp(1.25rem, 4vw, 2.3rem);
+}
+.footer-document h2 {
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  overflow-wrap: anywhere;
+}
+.footer-document p {
+  line-height: 1.5;
+  margin: 1rem 0;
+}
+.footer-document button {
+  padding: 0.55rem 1.1rem;
+  background: #24201c;
+  color: white;
+  border-radius: 5px;
+}
+@media (max-width: 850px) {
+  .concert-calendar .cal-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+  .concert-calendar .calendar-box {
+    padding: 1rem;
+  }
+  .concert-calendar .days button {
+    aspect-ratio: auto;
+    min-height: 44px;
+  }
+  .concert-calendar__header {
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+  }
+  .concert-calendar__header h2 {
+    width: 100%;
+    font-size: clamp(2.35rem, 8.2vw, 4rem);
+  }
+  .concert-calendar__header p {
+    margin: 0;
+    padding-left: 0.6rem;
+    font-size: 0.72rem;
+  }
+  .concert-calendar__header a {
+    margin: 0 0 0 auto;
+  }
+  .site-footer__bar {
+    grid-template-columns: 1fr auto;
+    gap: 1.3rem;
+    padding-top: 1.25rem;
+  }
+  .site-footer__nav {
+    grid-row: 2;
+    grid-column: 1/-1;
+    justify-content: flex-start;
+    gap: 1.3rem;
+    border: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .site-footer__fine {
+    flex-wrap: wrap;
+    margin-top: 1.2rem;
+  }
+  .site-footer__social {
+    gap: 0.65rem;
+  }
+}
+@media (max-width: 560px) {
+  .concert-calendar {
+    padding-inline: 4%;
+  }
+  .concert-calendar__header {
+    margin-inline: 0;
+  }
+  .schedule-ticket {
+    grid-template-columns: 30% minmax(0, 1fr);
+    min-height: 125px;
+  }
+  .schedule-ticket__portrait {
+    grid-row: span 2;
+  }
+  .schedule-ticket__details {
+    padding: 0.65rem 0.65rem 0.25rem;
+  }
+  .schedule-ticket__details h4 {
+    font-size: 1.5rem;
+  }
+  .schedule-ticket__booking {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    padding: 0.15rem 0.65rem 0.6rem;
+    border: 0;
+  }
+  .schedule-ticket__booking b {
+    font-size: 0.82rem;
+  }
+  .schedule-ticket__booking button {
+    font-size: 0.86rem;
+    padding: 0.45em 0.65em;
+    min-height: 36px;
+    gap: 0.28em;
+  }
+  .site-footer {
+    padding-inline: 5%;
+  }
+  .site-footer__brand {
+    gap: 0.6rem;
+  }
+  .site-footer__brand span {
+    padding-left: 0.6rem;
+    font-size: 0.64rem;
+  }
+  .site-footer__nav {
+    gap: 0.25rem 1rem;
+  }
+  .site-footer__fine {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .site-footer__documents {
+    flex-wrap: wrap;
+    gap: 0 0.75rem;
+  }
+}
+@media (max-width: 560px) {
+  .site-footer__documents > span {
+    display: none;
+  }
+}
+
+/* Афиша концертов */
+body[data-page="catalog"] {
+  --listing-paper: #f4e9dd;
+  --listing-orange: #ff570a;
+  --listing-line: #a09486;
+  --listing-display: Impact, "Arial Narrow", sans-serif;
+  --accent: var(--listing-orange);
+  background: #121110 url("assets/top-grain.jpg");
+  color: var(--listing-paper);
+}
+body[data-page="catalog"] #header {
+  border: 0;
+  height: clamp(66px, 5.8vw, 95px);
+  padding-inline: 5%;
+  color: var(--listing-paper);
+}
+body[data-page="catalog"] #header .logo img {
+  width: clamp(105px, 10.7vw, 200px);
+  mix-blend-mode: lighten;
+}
+body[data-page="catalog"] #header .slogan {
+  border-left: 0;
+  border-right: 1px solid #71665c;
+  padding: 0 3.6vw 0 0;
+  font-weight: 500;
+}
+body[data-page="catalog"] .site-footer::before {
+  display: none;
+}
+.concert-listing {
+  width: min(100%, 1900px);
+  margin: auto;
+  padding: 0 4.4% clamp(32px, 4vw, 84px);
+}
+.listing-cover {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: clamp(200px, 21.8vw, 420px);
+  padding: 1.1vw 0.8vw 2.5vw;
+}
+.listing-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0 -4.82% 0 28%;
+  z-index: -1;
+  background: url("assets/listing-stage.jpg") right center / 100% 100% no-repeat;
+  mask-image:
+    linear-gradient(to right, transparent, black 13%),
+    linear-gradient(180deg, transparent, black 6%, black 94%, transparent);
+  mask-composite: intersect;
+}
+.listing-cover h1 {
+  margin: 0;
+  text-transform: uppercase;
+  font: normal clamp(4rem, 7.65vw, 9rem) / 0.96 var(--listing-display);
+  letter-spacing: -0.02em;
+}
+.listing-crown {
+  width: 1.15em;
+  height: 0.88em;
+  vertical-align: baseline;
+  color: var(--listing-orange);
+}
+#filters.listing-filters {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 clamp(22px, 3.1vw, 64px);
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  color: var(--listing-paper);
+}
+.listing-toolbar {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.4vw, 26px);
+  flex-wrap: wrap;
+}
+.listing-filter {
+  position: relative;
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+.listing-filter--price {
+  flex: 0 1 auto;
+}
+.listing-filter summary,
+.listing-sort,
+.listing-pagination label,
+.listing-search {
+  font-size: clamp(0.88rem, 1.13vw, 1.3rem);
+}
+.listing-filter summary {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  min-height: 42px;
+  cursor: pointer;
+  list-style: none;
+  border: 1px solid #c3b5a6;
+  border-radius: 4px;
+  padding: 0.62em 0.85em;
+  user-select: none;
+}
+.listing-filter summary::-webkit-details-marker {
+  display: none;
+}
+.listing-filter summary span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.listing-filter summary::after {
+  content: "";
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 0.55em;
+  height: 0.55em;
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  transform: translateY(-2px) rotate(45deg);
+}
+.listing-filter[open] summary::after {
+  transform: rotate(225deg);
+}
+.listing-filter[open] summary,
+.listing-filter summary:hover {
+  border-color: var(--listing-orange);
+}
+.listing-options {
+  position: absolute;
+  z-index: 3;
+  top: calc(100% + 5px);
+  left: 0;
+  min-inline-size: 0;
+  width: max-content;
+  min-width: 100%;
+  max-width: min(85vw, 24rem);
+  max-height: 55vh;
+  overflow: auto;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid #736354;
+  border-radius: 5px;
+  color: #f7efe8;
+  background: #211d19;
+  box-shadow: 0 10px 18px #0007;
+}
+.listing-options legend {
+  position: absolute;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.listing-options label {
+  display: block;
+  padding: 0.35rem 0;
+  cursor: pointer;
+}
+.listing-options input[type="checkbox"] {
+  margin-right: 0.65rem;
+}
+.listing-options input[type="date"] {
+  color-scheme: dark;
+  color: inherit;
+  background: #28231e;
+}
+.listing-filter--price .listing-options {
+  min-width: 12rem;
+}
+.listing-sort {
+  margin-left: auto;
+  display: flex;
+  gap: 0.45em;
+  align-items: center;
+}
+.listing-sort select,
+.listing-pagination select {
+  background: #181613;
+  color: inherit;
+  border: 0;
+  padding: 0.45em 0.15em;
+  cursor: pointer;
+}
+.listing-search {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-bottom: 0.85rem;
+  max-width: 38rem;
+}
+.listing-search input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #a99888;
+  border-radius: 4px;
+  color: #fff;
+  background: #211c18;
+  padding: 0.6em 0.8em;
+}
+.listing-reset {
+  margin-top: 0.8em;
+  color: #ffa477;
+  text-decoration: underline;
+  padding: 0.3em 0;
+}
+.listing-results {
+  scroll-margin-top: 1rem;
+}
+.listing-row {
+  display: grid;
+  grid-template-columns: 25% 23% 12% 19% 21%;
+  align-items: center;
+  border-top: 1px solid var(--listing-line);
+  min-height: clamp(90px, 10.4vw, 191px);
+}
+.listing-row:last-child {
+  border-bottom: 1px solid var(--listing-line);
+}
+.listing-row__art {
+  position: relative;
+  align-self: stretch;
+  min-width: 0;
+  margin-block: 2px;
+  overflow: hidden;
+}
+.listing-row__art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+}
+.listing-row__art--plain {
+  background: var(--listing-orange);
+}
+.listing-row__art--plain img {
+  filter: grayscale(1);
+  clip-path: polygon(0 0, 100% 0, 96% 33%, 94% 37%, 87% 90%, 85% 100%, 0 100%);
+  object-position: center 34%;
+}
+.listing-row__artist {
+  min-width: 0;
+  padding: 0.7rem 1.5vw;
+}
+.listing-row__artist small {
+  text-transform: uppercase;
+  font-size: clamp(0.67rem, 0.95vw, 1.1rem);
+}
+.listing-row h2 {
+  margin: 0.14em 0 0;
+  font: normal clamp(1.65rem, 3.05vw, 3.8rem) / 1 var(--listing-display);
+  text-transform: uppercase;
+  letter-spacing: -0.018em;
+  overflow-wrap: anywhere;
+}
+.listing-row h2 button {
+  text-align: left;
+  padding: 0;
+  text-transform: inherit;
+}
+.listing-row h2 button:hover,
+.listing-save:hover {
+  color: #ffa875;
+}
+.listing-row__date,
+.listing-row__venue,
+.listing-row__actions {
+  min-width: 0;
+  border-left: 1px solid var(--listing-line);
+  min-height: 5.6vw;
+  padding: 0.15em 1.6vw;
+}
+.listing-row__date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-transform: uppercase;
+}
+.listing-row__date strong {
+  font: normal clamp(1.85rem, 3.7vw, 4.5rem) / 1 var(--listing-display);
+}
+.listing-row__date span,
+.listing-row__venue {
+  font-size: clamp(0.78rem, 1.18vw, 1.5rem);
+}
+.listing-row__venue {
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+}
+.listing-row__venue small {
+  display: block;
+  font-size: 0.95em;
+  margin-top: 0.5em;
+}
+.listing-row__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.45vw 0.3rem;
+  align-items: center;
+  padding-right: 0;
+}
+.listing-row__actions b {
+  font-size: clamp(0.9rem, 1.4vw, 1.8rem);
+}
+.listing-save {
+  display: grid;
+  place-items: center;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0;
+}
+.listing-save[aria-pressed="true"] svg {
+  fill: var(--listing-orange);
+}
+.listing-buy,
+.concert-details [data-seats] {
+  background: #ff590b;
+  color: #170e09;
+  border-radius: 4px;
+  font:
+    normal clamp(1rem, 1.65vw, 2rem) / 1 Impact,
+    "Arial Narrow",
+    sans-serif;
+  text-transform: uppercase;
+  mask:
+    radial-gradient(circle at left, transparent 5px, black 6px) left/51% 100%
+      no-repeat,
+    radial-gradient(circle at right, transparent 5px, black 6px) right/51% 100%
+      no-repeat;
+}
+.listing-buy {
+  grid-column: 1/-1;
+  justify-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  min-height: 40px;
+  padding: 0.65em 0.4em;
+}
+.listing-buy:hover,
+.listing-buy:focus-visible,
+.concert-details [data-seats]:hover {
+  background: #ff884b;
+}
+.listing-pagination,
+.listing-pagination nav,
+.listing-pagination [data-page-numbers] {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.listing-pagination {
+  justify-content: space-between;
+  margin-top: 2.8vw;
+}
+.listing-pagination button {
+  min-width: 38px;
+  min-height: 38px;
+  border-radius: 4px;
+}
+.listing-pagination [aria-current="page"] {
+  background: var(--listing-orange);
+  color: #18110d;
+}
+.listing-pagination [data-step] {
+  border: 1px solid currentColor;
+}
+.listing-empty {
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--listing-line);
+}
+#panel:has(.concert-details) {
+  width: min(90vw, 1500px);
+  border: 1px solid #a99b8b;
+  background: #141210 url("assets/top-grain.jpg");
+  color: #f5eadc;
+}
+#panel:has(.concert-details) .poster {
+  width: 40%;
+  padding: 3.2%;
+  background: linear-gradient(110deg, #ded5c9 62%, #ff570a 88%);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    95% 21%,
+    92% 34%,
+    94% 54%,
+    90% 68%,
+    87% 100%,
+    0 100%
+  );
+}
+#panel:has(.concert-details) .poster > img {
+  filter: grayscale(0.85);
+  clip-path: polygon(
+    0 0,
+    99% 0,
+    94% 22%,
+    91% 35%,
+    92% 54%,
+    88% 66%,
+    80% 84%,
+    78% 86%,
+    65% 100%,
+    0 100%
+  );
+}
+#panel:has(.concert-details) .poster:before {
+  z-index: 0;
+  background: linear-gradient(0deg, #0b0a09b0, transparent 55%);
+  pointer-events: none;
+}
+#panel:has(.concert-details) .poster > div {
+  z-index: 1;
+  max-width: 88%;
+}
+#panel:has(.concert-details) .poster strong {
+  font-size: clamp(2.8rem, 5.1vw, 6.7rem);
+  line-height: 0.98;
+}
+#panel:has(.concert-details) .badge {
+  background: #ff580c;
+  color: #17100b;
+  border-radius: 0;
+  font:
+    normal 1.2rem Impact,
+    "Arial Narrow",
+    sans-serif;
+  text-transform: uppercase;
+}
+#panel:has(.concert-details) [data-close] {
+  background: #16120f99;
+  color: white;
+}
+.concert-details {
+  padding: clamp(24px, 3.5vw, 70px) clamp(20px, 3vw, 60px)
+    clamp(24px, 3.5vw, 70px) 1.15vw;
+}
+.poster__crown {
+  display: none;
+}
+#panel:has(.concert-details) .poster__crown {
+  display: block;
+  position: absolute;
+  left: 7%;
+  top: 7%;
+  width: 23%;
+  height: auto;
+  color: #ff580b;
+  transform: rotate(-17deg);
+}
+@media (min-width: 651px) {
+  .concert-details {
+    font-size: clamp(1rem, 1.28vw, 1.45rem);
+    padding-bottom: clamp(40px, 5vw, 78px);
+  }
+  .concert-details .buy-row {
+    margin-top: 2vw;
+    padding-top: 1.8vw;
+  }
+}
+.concert-details h2 {
+  font:
+    normal clamp(2.2rem, 4.15vw, 5rem) / 1 Impact,
+    "Arial Narrow",
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+}
+.concert-details h2:after {
+  content: "";
+  display: block;
+  margin: 0.12em 12% 0.2em auto;
+  width: 39%;
+  height: 0.065em;
+  background: #ff5a0b;
+  border-radius: 100% 50% 30% 10%;
+}
+.concert-details dl {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.25fr;
+  gap: 0.7rem;
+}
+.concert-details dl > div + div {
+  border-left: 1px solid #82766c;
+  padding-left: 1vw;
+}
+.concert-details dt {
+  margin: 0 0 0.3em;
+  color: inherit;
+  display: flex;
+  gap: 0.6em;
+  align-items: center;
+}
+.concert-details p {
+  color: #e9dfd5;
+}
+.concert-details .buy-row {
+  gap: 1rem;
+}
+.concert-details .buy-row b {
+  font:
+    normal clamp(1.65rem, 2.8vw, 3.7rem) / 1 Impact,
+    "Arial Narrow",
+    sans-serif;
+}
+.concert-details [data-seats] {
+  padding: 0.8em 1.4em;
+}
+@media (max-width: 900px) {
+  .listing-filter {
+    flex: 1 1 8rem;
+  }
+  .listing-filter--price {
+    flex: 0 1 auto;
+  }
+  .listing-row {
+    grid-template-columns: 22% 24% 12% 22% 20%;
+  }
+  .listing-row__date,
+  .listing-row__venue,
+  .listing-row__actions {
+    padding-inline: 1vw;
+  }
+  .listing-row__actions {
+    padding-right: 0;
+  }
+}
+@media (max-width: 650px) {
+  body[data-page="catalog"] #header {
+    height: auto;
+  }
+  body[data-page="catalog"] #header .slogan {
+    border: 0;
+  }
+  .listing-cover {
+    min-height: 162px;
+    padding: 1rem 0;
+    align-items: center;
+  }
+  .listing-cover h1 {
+    font-size: clamp(2.8rem, 10.6vw, 4rem);
+  }
+  .listing-cover::before {
+    inset: 0 -4.8% 0 24%;
+    background-size: auto 100%;
+    mask-image: linear-gradient(to right, transparent, black 35%);
+  }
+  .listing-toolbar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+  .listing-filter:nth-child(even) .listing-options {
+    left: auto;
+    right: 0;
+  }
+  .listing-sort {
+    grid-column: 1/-1;
+  }
+  .listing-row {
+    grid-template-columns: 30% minmax(0, 1fr) auto;
+    gap: 0.35rem 0.65rem;
+    min-height: 125px;
+    padding: 0.65rem 0;
+  }
+  .listing-row__art {
+    grid-column: 1;
+    grid-row: 1/4;
+    margin: 0;
+  }
+  .listing-row__art img {
+    object-position: 50% center;
+  }
+  .listing-row__artist {
+    padding: 0;
+  }
+  .listing-row h2 {
+    font-size: clamp(1.3rem, 6vw, 2rem);
+  }
+  .listing-row__date,
+  .listing-row__venue,
+  .listing-row__actions {
+    min-height: 0;
+    border: 0;
+    padding: 0;
+  }
+  .listing-row__date {
+    grid-column: 3;
+    align-items: flex-end;
+  }
+  .listing-row__date strong {
+    font-size: 1.55rem;
+  }
+  .listing-row__date span {
+    font-size: 0.65rem;
+  }
+  .listing-row__venue {
+    grid-column: 2/-1;
+    gap: 0.35rem;
+    font-size: 0.77rem;
+  }
+  .listing-row__venue small {
+    display: inline;
+    margin: 0 0 0 0.5em;
+  }
+  .listing-row__actions {
+    grid-column: 2/-1;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 0.2rem;
+  }
+  .listing-buy {
+    grid-row: 1;
+    grid-column: 2;
+    min-height: 36px;
+    padding: 0.55em 0.7em;
+    font-size: 0.9rem;
+    gap: 0.35em;
+  }
+  .listing-save {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .listing-pagination {
+    margin-top: 1.4rem;
+  }
+  #panel:has(.concert-details) {
+    width: 94vw;
+  }
+  #panel:has(.concert-details) .poster {
+    width: 100%;
+    min-height: 135px;
+    height: 26dvh;
+    max-height: 220px;
+    clip-path: none;
+    padding: 1rem;
+  }
+  #panel:has(.concert-details) .poster img {
+    object-position: center 32%;
+  }
+  #panel:has(.concert-details) .poster strong {
+    font-size: 2.2rem;
+  }
+  .concert-details {
+    padding: 1.05rem;
+  }
+  .concert-details dl {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 0.7rem;
+  }
+  .concert-details dl > div:last-child {
+    grid-column: 1/-1;
+    border: 0;
+    padding-left: 0;
+  }
+  .concert-details .buy-row {
+    flex-wrap: wrap;
+  }
+}
+.market-tabs {
+  display: flex;
+  gap: 1.4rem;
+  margin: 0 0 1.45rem;
+  border-bottom: 1px solid #665c51;
+}
+.market-tabs a {
+  padding: 0.65rem 0;
+}
+.market-tabs a[aria-current="page"]::after {
+  background: #ff5709;
+}
+#market-heading,
+.market-row h3 {
+  text-transform: uppercase;
+  font:
+    normal clamp(1.5rem, 2.4vw, 2.8rem) / 1.15 Impact,
+    "Arial Narrow",
+    sans-serif;
+}
+#market-status:not(:empty) {
+  margin: 1rem 0;
+}
+.market-row {
+  display: grid;
+  grid-template-columns: minmax(75px, 16%) minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 1.15rem;
+  border-bottom: 1px solid #7b7165;
+  padding: 1rem 0;
+}
+.market-row img {
+  width: 100%;
+  height: 7rem;
+  object-position: center 30%;
+}
+.market-row p {
+  margin: 0.3rem 0;
+}
+.market-row .listing-buy {
+  grid-column: auto;
+  padding: 0.65em 1.2em;
+}
+.admission [data-sell] {
+  display: block;
+  margin-top: 0.8rem;
+}
+@media (max-width: 600px) {
+  .market-row {
+    grid-template-columns: 28% minmax(0, 1fr);
+    gap: 0.7rem;
+  }
+  .market-row img {
+    height: 6rem;
+  }
+  .market-row .listing-buy {
+    justify-self: start;
+  }
+}
